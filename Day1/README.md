@@ -350,9 +350,9 @@ set load         = 0.01765
 
 
 📷 Screenshot:
-![run_synthesis_summary](screenshots/run_synthesis_summary1.png)
+![run_synthesis_summary](Screenshots/run_synthesis_summary1.png)
 
-![run_synthesis_summary](screenshots/run_synthesis_summary2.png)
+![run_synthesis_summary](Screenshots/run_synthesis_summary2.png)
 
 ---
 
