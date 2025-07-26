@@ -169,7 +169,7 @@ sky130_osu_sc_t18/   # OSU-based standard cells (for experimentation)
 ---
 
 📷 Screenshot:  
-![sky130A PDK Directory](Screenshots/sky130A-pdk-directory.png)
+![sky130A PDK Directory](Screenshots/sky130A-pdk-director.png)
 
 
 ---
