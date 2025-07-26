@@ -23,13 +23,13 @@
 - **IP Blocks**: Pre-designed logic like PLLs, memories, etc., reused across chips  
 
 📷 Screenshot:  
-![Processor/SoC](screenshots/Processor-SoC.png)
+![Processor/SoC](Screenshots/Processor-SoC.png)
 
 📷 Screenshot:  
-![ATMega32u4 RISC-based microcontroller](screenshots/ATMega32u4 RISC-based microcontroller.png)
+![ATMega32u4-RISC-based-microcontroller](Screenshots/ATMega32u4 RISC-based microcontroller.png)
 
 📷 Screenshot:  
-![chip-package-core](screenshots/chip-package-core.png)
+![chip-package-core](Screenshots/chip-package-core.png)
 
 ---
 
@@ -40,7 +40,7 @@
 - Base ISA is simple, modular, and extensible  
 
 📷 Screenshot:  
-![riscv-diagram](screenshots/riscv-diagram.png)
+![riscv-diagram](Screenshots/riscv-diagram.png)
 
 ---
 
@@ -51,7 +51,7 @@
 - VLSI engineers design the underlying digital hardware that executes software  
 
 📷 Screenshot:  
-![software-to-hardware](screenshots/software-to-hardware.png)
+![software-to-hardware](Screenshots/software-to-hardware.png)
 
 ---
 
@@ -65,7 +65,7 @@
 | Checks    | Netgen/Klayout   | DRC, LVS, PEX              |
 
 📷 Screenshot:  
-![open-source-eda-stack](screenshots/open-source-eda-stack.png)
+![open-source-eda-stack](Screenshots/open-source-eda-stack.png)
 
 ---
 
@@ -78,7 +78,7 @@
 5. Export GDSII for tapeout  
 
 📷 Screenshot:  
-![rtl2gdsii-simplified](screenshots/rtl2gdsii-simplified.png)
+![rtl2gdsii-simplified](Screenshots/rtl2gdsii-simplified.png)
 
 ---
 
@@ -89,7 +89,7 @@
 - Output logs for every stage are stored inside `/runs/<design-name>/`  
 
 📷 Screenshot:  
-![openlane-detailed-flow](screenshots/openlane-detailed-flow.png)
+![openlane-detailed-flow](Screenshots/openlane-detailed-flow.png)
 
 ---
 
@@ -114,7 +114,7 @@ vsdstdcelldesign/
 ```
 
 📷 Screenshot:  
-![openlane-dir-structure](screenshots/openlane-dir-structure.png)
+![openlane-dir-structure](Screenshots/openlane-dir-structure.png)
 
 ---
 
@@ -141,7 +141,7 @@ prep -design vsdstdcelldesign
 ```
 
 📷 Screenshot:  
-![design-prep-output](screenshots/design-prep-output.png)
+![design-prep-output](Screenshots/design-prep-output.png)
 
 ---
 
@@ -159,7 +159,7 @@ run_synthesis
 ```
 
 📷 Screenshot:  
-![synthesis-log-output](screenshots/synthesis-log-output.png)
+![synthesis-log-output](Screenshots/synthesis-log-output.png)
 
 Check the log file manually:
 
@@ -168,7 +168,7 @@ runs/vsdstdcelldesign/logs/synthesis/1-yosys_0.log
 ```
 
 📷 Screenshot:  
-![synthesis-log-file](screenshots/synthesis-log-file.png)
+![synthesis-log-file](Screenshots/synthesis-log-file.png)
 
 ---
 
@@ -182,7 +182,7 @@ Flop Ratio = (Number of DFFs / Total Cells) * 100
 ```
 
 📷 Screenshot:  
-![flop-ratio-calculation](screenshots/flop-ratio-calculation.png)  
+![flop-ratio-calculation](Screenshots/flop-ratio-calculation.png)  
 📷 Screenshot:  
 ![highlight-yosys-log](screenshots/highlight-yosys-log.png)
 
