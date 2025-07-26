@@ -1,10 +1,10 @@
-# Day 2 – Chip Floorplanning & Floorplan in OpenLANE
+# Day 2: Good Floorplan vs Bad Floorplan and Introduction to Library Cells
 
-## Floorplanning Concepts
+## Chip Floor Planning Considerations
 
-### 1. Utilization Factor & Aspect Ratio
+### 1. Utilization Factor and Aspect Ratio
 
-```bash
+```sh
 Utilisation Factor =  Area occupied by netlist
                      --------------------------
                         Total area of core
@@ -12,201 +12,154 @@ Utilisation Factor =  Area occupied by netlist
 Aspect Ratio = Height / Width
 ```
 
-- Utilization Factor ≈ 0.5–0.6 in practice.  
-- 100% utilization leaves no space for routing or buffers.  
-- Aspect Ratio is used to control layout shape.
-
----
-
-### 2. Fix Location of Pre-Placed Cells
-
-- Pre-placed cells (like macros) are positioned manually before automated placement begins.
-- Their location must be set in advance and will not be adjusted by tools.
-
----
-
-### 3. Add Decoupling Capacitors
-
-- Preplaced cells demand large current during switching.
-- Due to resistance/inductance in wires, voltage can drop.
-- Decaps help supply fast-switching current locally to maintain voltage levels within the noise margin.
-
----
-
-### 4. Power Rails (Mesh)
-
-- Decaps can’t be placed everywhere.
-- A power mesh ensures:
-  - Nearby VDD/VSS availability
-  - Reduced voltage dips and ground bounces during switching
-
----
-
-### 5. Placement of Pins
-
-- I/O Pins are placed in the area between core and die boundary.
-- Their position is chosen based on connectivity with cells.
-
----
-
-### 6. Block Placement in Pin Region
-
-- Block placement in areas where I/O pins are located.
-- Ensures no cells are placed near the boundary to avoid congestion.
+- If Utilization = 1, there's no space left for routing or buffers. Typically, we keep it around 0.5–0.6.
+- Lower utilization allows space for routing wires and filler cells.
 
 📷 Screenshot:  
-![logical-blockage](screenshots/20.png)
-
-📷 Screenshot:  
-![pin-boundaries](screenshots/19.png)
+![utilization-ratio](screenshots/utilization-ratio.png)
 
 ---
 
-## LAB – Floorplanning with OpenLANE
+### 2. Concept of Pre-placed Cells
 
-### Step 1: Understand Configuration Hierarchy
-
-- Floorplan settings are defined in OpenLANE config files.
-- Priority order (low to high):
-  1. `floorplan.tcl`
-  2. `config.tcl`
-  3. `sky130A_sky130_fd_sc_hd_config.tcl`
+- Pre-placed cells (e.g., macros) must be fixed before automated placement.
+- These cannot be moved by place and route tools.
 
 📷 Screenshot:  
-![config-folder](screenshots/21.png)
-
-📷 Screenshot:  
-![config-order-1](screenshots/24.png)
-
-📷 Screenshot:  
-![config-order-2](screenshots/23.png)
-
-📷 Screenshot:  
-![floorplan-tcl](screenshots/22.png)
+![preplaced-cells](screenshots/preplaced-cells.png)
 
 ---
 
-### Step 2: Run Floorplan
+### 3. Decoupling Capacitors
 
-```bash
-run_floorplan
+- High switching blocks may suffer from voltage drop due to wire resistance and inductance.
+- Decaps near those blocks ensure proper voltage levels by quickly supplying charge.
+
+📷 Screenshot:  
+![decaps-example](screenshots/decaps-example.png)
+
+---
+
+### 4. Power Planning
+
+- Large simultaneous switching causes IR drop and ground bounce.
+- Power mesh ensures stable power distribution via multiple VDD/VSS paths.
+
+📷 Screenshot:  
+![power-mesh](screenshots/power-mesh.png)
+
+---
+
+### 5. Pin Placement and Logical Cell Placement Blockage
+
+- Pins are placed in the IO ring between the core and die.
+- Pin locations depend on cell placement.
+- Block cell placement near IO pins to prevent congestion.
+
+📷 Screenshot:  
+![pin-placement](screenshots/pin-placement.png)
+
+📷 Screenshot:  
+![placement-blockage](screenshots/placement-blockage.png)
+
+---
+
+## LAB: Floorplan using OpenLANE
+
+### 6. Set Floorplan Configuration
+
+- Config variables can be defined in:
+  - `floorplan.tcl`
+  - `config.tcl`
+  - `sky130A_sky130_fd_sc_hd_config.tcl` (highest priority)
+
+📷 Screenshot:  
+![floorplan-config-sources](screenshots/floorplan-config-sources.png)
+
+---
+
+### 7. Run Floorplan
+
+```tcl
+% run_floorplan
 ```
 
-- Output DEF file generated at:
-  ```
-  openlane/designs/picorv32a/runs/<date>/results/floorplan/picorv32a.floorplan.def
-  ```
+- Output location:  
+  `openlane/designs/picorv32a/runs/<date>/results/floorplan/picorv32a.floorplan.def`
 
 📷 Screenshot:  
-![def-terminal](screenshots/diearea.png)
+![floorplan-run-output](screenshots/floorplan-run-output.png)
 
-### Calculate Die Area
+---
 
-```bash
+### 8. Check Die Area from DEF File
+
+```sh
 DIEAREA (0 0) (554570 565290)
-Unit = 1000 microns
+Unit: 1000 microns
 
-Area = (554570 / 1000) * (565290 / 1000)
-     = 311829.1653 microns²
-```
-
----
-
-### Step 3: View DEF in Magic
-
-```bash
-magic -T /path/to/sky130A.tech \
-  lef read ../../tmp/merged.lef \
-  def read picorv32a.floorplan.def &
+Die Area = (554570/1000) * (565290/1000)
+         = 311829.1653 µm²
 ```
 
 📷 Screenshot:  
-![layout-in-magic](screenshots/25.png)
+![die-vs-core](screenshots/die-vs-core.png)
 
 ---
 
-### Step 4: Check I/O Pins
+### 9. Open Floorplan in Magic
 
-- Input pins are placed equally along the boundary.
-- Controlled by `FP_IO_MODE = 1`.
-
-📷 Screenshot:  
-![io-pins](screenshots/31.png)
-
----
-
-### Step 5: Inspect Components in Magic
-
-Use tkcon window:
-1. Select a component
-2. Type:
-
-```bash
-what
+```sh
+magic -T sky130.tech \
+      lef read ../../tmp/merged.lef \
+      def read picorv32a.floorplan.def &
 ```
 
 📷 Screenshot:  
-![component-1](screenshots/26.png)  
-📷 Screenshot:  
-![component-2](screenshots/27.png)  
-📷 Screenshot:  
-![component-3](screenshots/28.png)  
-📷 Screenshot:  
-![component-4](screenshots/29.png)
+![magic-floorplan](screenshots/magic-floorplan.png)
 
 ---
 
-### Step 6: Check Standard Cells
+### 10. Analyze Magic Layout
 
-- Standard cells will appear at the bottom-left area of the layout.
+- Use the `what` command in Magic’s tkcon to identify cells.
+- Equidistant input pins visible if `FP_IO_MODE = 1`.
+- Standard cells located at bottom left.
 
 📷 Screenshot:  
-![std-cells](screenshots/30.png)
+![magic-what](screenshots/magic-what.png)
+
+📷 Screenshot:  
+![magic-cells](screenshots/magic-cells.png)
 
 ---
 
-## Config Parameters Used
+### 11. Floorplan Config Review
 
-Inside:
-
-```bash
-openlane/designs/picorv32a/runs/<date>/
-```
-
-Important files/folders:
-- `config.tcl`
-- `results/`
-- `reports/`
-- `logs/`
-- `cmds.log`
-- `tmp/`
+- Configs saved to:  
+  `openlane/designs/picorv32a/runs/<date>/config.tcl`
+- Overrides shown clearly, e.g.,:
+  - `FP_IO_VMETAL`, `FP_CORE_UTIL`, etc.
 
 📷 Screenshot:  
-![output-config](screenshots/32.png)
-
-- `FP_IO_HMETAL` and `FP_IO_VMETAL` values were overridden from defaults.
-- `FP_CORE_UTIL` set to 65 in one file, but overwritten to 50 due to higher-priority config.
+![floorplan-config-review](screenshots/floorplan-config-review.png)
 
 ---
 
-## Debug Floorplan Logs
+### 12. Floorplan Logs
 
-Logs are available here:
-
-```bash
-openlane/designs/picorv32a/runs/<date>/logs/floorplan/
-```
+- Logs available at:  
+  `openlane/designs/picorv32a/runs/<date>/logs/floorplan/`
 
 📷 Screenshot:  
-![log-dir](screenshots/33.png)
-
-📷 Screenshot:  
-![ioplacer-log](screenshots/34.png)
+![floorplan-logs](screenshots/floorplan-logs.png)
 
 ---
 
-## References
+### 13. ioPlacer.log
 
-- [DEF Format Overview](https://ivlsi.com/design-exchange-format-def-in-vlsi-physical-design/)
-- [DEF 5.8 Language Reference](https://coriolis.lip6.fr/doc/lefdef/lefdefref/LEFSyntax.html)
+- Contains pin placement logs and IO warnings.
+
+📷 Screenshot:  
+![ioplacer-log](screenshots/ioplacer-log.png)
 
