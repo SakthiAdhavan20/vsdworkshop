@@ -172,7 +172,7 @@ Placement is performed in two stages:
 - **Global Placement** – Initial placement without legalization. It uses **HPWL (Half Perimeter Wire Length)** as the optimization metric.
 - **Detailed Placement** – Legalizes the placement by aligning cells to legal rows and eliminating overlaps.
 
-![Placement stages](Placement-stages.png)
+![Placement stages](screenshots/Placement-stages.png)
 
 ---
 
@@ -192,7 +192,7 @@ This command executes:
 Objective: Minimize the **overflow value**  
 A successful placement run shows overflow values progressively decreasing with each iteration, indicating that the design is converging.
 
-![Placement overflow log](Placement-overflow-log.png)
+![Placement overflow log](screenshots/Placement-overflow-log.png)
 
 ---
 
@@ -218,28 +218,28 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 lef read ../../tmp/merged.lef \
 def read picorv32a.placement.def &
 ```
-![Placement DEF file](Placement-DEF-file.png)
+![Placement DEF file](screenshots/Placement-DEF-file.png)
 ---
 
 ### Final Layout View
 
-![Zoomed placement layout](Zoomed-placement-layout.png)
+![Zoomed placement layout](screenshots/Zoomed-placement-layout.png)
 
 ---
 
 # Cell Design and Characterization Flows
 
-![Overview of Cell Design Flow](../images/39.png)
+![Overview of Cell Design Flow](screenshots/../images/39.png)
 
 In each step of the RTL to GDSII flow, the key building blocks are `cells` or `gates`.
 
-![Logic gates](../images/40.png)
+![Logic gates](screenshots/../images/40.png)
 
 ---
 
 ### How Do We Model or Characterize These Cells or Gates?
 
-![Standard Cell Types](../images/41.png)
+![Standard Cell Types](screenshots/../images/41.png)
 
 - A standard cell can have:
   - Different sizes
@@ -248,11 +248,11 @@ In each step of the RTL to GDSII flow, the key building blocks are `cells` or `g
 
 These cells are designed using the following **cell design flow**:
 
-![Cell Design Flow](../images/42.png)
+![Cell Design Flow](screenshots/../images/42.png)
 
 ---
 
-![Inputs for Cell Design](../images/43.png)
+![Inputs for Cell Design](screenshots/../images/43.png)
 
 **Inputs for cell design flow:**  
 - DRC & LVS rules  
@@ -262,7 +262,7 @@ These cells are designed using the following **cell design flow**:
 
 ---
 
-![Circuit and Layout Design Steps](../images/44.png)
+![Circuit and Layout Design Steps](screenshots/../images/44.png)
 
 **Design Steps:**  
 - Circuit design  
@@ -281,11 +281,11 @@ These cells are designed using the following **cell design flow**:
 7. Provide output capacitances
 8. Include necessary simulation commands (e.g., transient or DC analysis)
 
-![Characterization Inputs and Config](../images/45.png)
+![Characterization Inputs and Config](screenshots/../images/45.png)
 
-![Timing Noise Power Extraction](../images/46.png)
+![Timing Noise Power Extraction](screenshots/../images/46.png)
 
-![GUNA Output Models](../images/47.png)
+![GUNA Output Models](screenshots/../images/47.png)
 
 From steps 1–8, a configuration file is generated and fed to the characterization tool [GUNA](https://github.com/Cloud-V/GUNA).  
 GUNA produces:
@@ -321,7 +321,7 @@ This graph shows two inverters connected in series.
 - Blue: output of the second inverter  
 - Threshold points for slew and delay are annotated.
 
-![Two Inverters with Threshold Markings](../images/48.png)
+![Two Inverters with Threshold Markings](screenshots/../images/48.png)
 
 ---
 
@@ -329,10 +329,10 @@ Below are timing graphs for propagation delays.
 Red = Input, Blue = Output of the buffer.
 
 **Rise Delay Graph**  
-![Rise Delay Graph](../images/49.png)
+![Rise Delay Graph](screenshots/../images/49.png)
 
 **Fall Delay Graph**  
-![Fall Delay Graph](../images/50.png)
+![Fall Delay Graph](screenshots/../images/50.png)
 
 ```shell
 Rise Delay             = time(out_rise_thr) - time(in_rise_thr)
@@ -344,5 +344,5 @@ Fall Transition Time   = time(slew_high_fall_thr) - time(slew_low_fall_thr)
 ---
 
 **Combined Timing Definitions**  
-![Timing Definitions Diagram](../images/51.png)
+![Timing Definitions Diagram](screenshots/../images/51.png)
 
