@@ -93,7 +93,7 @@ git clone https://github.com/nickson-jose/vsdstdcelldesign.git
 ```
 
   
-![git_clone](screenshots/66.png)
+![git_clone](screenshots/git_clone.png)
 
 ### 4.2 Open Inverter Layout in Magic
 
@@ -102,25 +102,25 @@ magic -T sky130A.tech sky130_inv.mag
 ```
 
  
-![magic_open](screenshots/67.png)
+![magic_open](screenshots/magic_open.png)
 
  
-![magic_layers1](screenshots/68.png)
+![magic_layers1](screenshots/magic_layers1.png)
 
   
-![magic_layers2](screenshots/69.png)
+![magic_layers2](screenshots/magic_layers2.png)
 
   
-![magic_layers3](screenshots/70.png)
+![magic_layers3](screenshots/magic_layers3.png)
 
   
-![magic_layers4](screenshots/71.png)
+![magic_layers4](screenshots/magic_layers4.png)
 
   
-![magic_layers5](screenshots/72.png)
+![magic_layers5](screenshots/magic_layers5.png)
 
  
-![magic_layers6](screenshots/73.png)
+![magic_layers6](screenshots/magic_layers6.png)
 
 ---
 
@@ -132,31 +132,31 @@ ext2spice sky130_inv.ext
 ext2spice
 ```
 
-📷 Screenshot:  
-![ext2spice](screenshots/74.png)
+  
+![ext2spice](screenshots/ext2spice.png)
 
-📷 Screenshot:  
-![ext_files](screenshots/75.png)
+  
+![ext_files](screenshots/ext_files.png)
 
-📷 Screenshot:  
-![ext_content](screenshots/76.png)
+  
+![ext_content](screenshots/ext_content.png)
 
 ---
 
 ## 5. Final SPICE Deck with Sky130 Tech
 
 ### 5.1 Modify `.option scale`  
-📷 Screenshot:  
+:  
 ![scale_option](screenshots/77.png)
 
 ### 5.2 Use Correct Models  
 - `pshort_model.0` for PMOS  
 - `nshort_model.0` for NMOS  
 
-📷 Screenshot:  
+  
 ![lib_model](screenshots/79.png)
 
-📷 Screenshot:  
+  
 ![final_spice](screenshots/78.png)
 
 ---
