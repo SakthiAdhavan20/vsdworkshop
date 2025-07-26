@@ -229,17 +229,17 @@ def read picorv32a.placement.def &
 
 # Cell Design and Characterization Flows
 
-![Overview of Cell Design Flow](screenshots/../images/39.png)
+![Overview of Cell Design Flow](screenshots/Overview-of-Cell-Design-Flow.png)
 
 In each step of the RTL to GDSII flow, the key building blocks are `cells` or `gates`.
 
-![Logic gates](screenshots/../images/40.png)
+![Logic gates](screenshots/Logic-gates.png)
 
 ---
 
 ### How Do We Model or Characterize These Cells or Gates?
 
-![Standard Cell Types](screenshots/../images/41.png)
+![Standard Cell Types](screenshots/Standard-Cell-Types.png)
 
 - A standard cell can have:
   - Different sizes
@@ -248,11 +248,11 @@ In each step of the RTL to GDSII flow, the key building blocks are `cells` or `g
 
 These cells are designed using the following **cell design flow**:
 
-![Cell Design Flow](screenshots/../images/42.png)
+![Cell Design Flow](screenshots/Cell-Design-Flow.png)
 
 ---
 
-![Inputs for Cell Design](screenshots/../images/43.png)
+![Inputs for Cell Design](screenshots/Inputs-for-Cell-Design.png)
 
 **Inputs for cell design flow:**  
 - DRC & LVS rules  
@@ -262,7 +262,7 @@ These cells are designed using the following **cell design flow**:
 
 ---
 
-![Circuit and Layout Design Steps](screenshots/../images/44.png)
+![Circuit and Layout Design Steps](screenshots/Circuit-and-Layout-Design-Steps.png)
 
 **Design Steps:**  
 - Circuit design  
@@ -281,11 +281,11 @@ These cells are designed using the following **cell design flow**:
 7. Provide output capacitances
 8. Include necessary simulation commands (e.g., transient or DC analysis)
 
-![Characterization Inputs and Config](screenshots/../images/45.png)
+![Characterization Inputs and Config](screenshots/Characterization-Inputs-and-Config.png)
 
-![Timing Noise Power Extraction](screenshots/../images/46.png)
+![Timing Noise Power Extraction](screenshots/Timing-Noise-Power-Extraction.png)
 
-![GUNA Output Models](screenshots/../images/47.png)
+![GUNA Output Models](screenshots/GUNA-Output-Models.png)
 
 From steps 1–8, a configuration file is generated and fed to the characterization tool [GUNA](https://github.com/Cloud-V/GUNA).  
 GUNA produces:
