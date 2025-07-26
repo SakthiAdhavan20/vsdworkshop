@@ -311,7 +311,7 @@ After synthesis, OpenLANE triggers the **Verilog backend**, which:
 - Maps cells to standard library
 - Dumps synthesized Verilog for `picorv32a`
 
-📝 **Yosys Info**:
+  **Yosys Info**:
 
 - Version: 0.9+3621  
 - Optimizations: `abc`, `opt_expr`, etc.  
@@ -331,7 +331,7 @@ set output_delay = 4.946 ns
 set load         = 0.01765
 ```
 
-⚠️ *STA Warnings (liberty files)*:
+ *STA Warnings (liberty files)*:
 
 - Some operating conditions not found:  
   `ff_n40C_1v95`, `ss_100C_1v60`  
