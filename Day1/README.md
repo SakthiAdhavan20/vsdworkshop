@@ -182,7 +182,7 @@ This section documents running the `picorv32a` design using OpenLANE v0.21 and S
 
 ---
 
-## ✅ Step 1 – Launch Docker and Start OpenLANE Flow
+#### ✅ Step 1 – Launch Docker and Start OpenLANE Flow
 
 ```bash
 cd ~/Desktop/work/tools/openlane_working_dir/openlane/
@@ -206,7 +206,7 @@ package require openlane 0.9
 
 ---
 
-## ✅ Step 2 – Prepare the Picorv32a Design
+#### ✅ Step 2 – Prepare the Picorv32a Design
 
 Inside the interactive OpenLANE shell:
 
@@ -229,7 +229,7 @@ This step:
 
 ---
 
-## ✅ Step 3 – Explore Design Run and Temporary Files
+#### ✅ Step 3 – Explore Design Run and Temporary Files
 
 ```bash
 cd designs/picorv32a/runs/
@@ -244,7 +244,7 @@ You can now access all intermediate folders:
 - Files like `merged.lef`, `trimmed.lib`, `met_layers_list.txt`
 
 📷 Screenshot:  
-![Step 3 - Explore tmp Folder](Screenshots/step3_explore_tmp_folder.png)
+![Step 3 - Explore tmp Folder](Screenshots/tep3_explore_tmp_folder.png)
 
 ---
 
