@@ -112,7 +112,7 @@ cd ~/Desktop/work/tools/openlane_working_dir/pdks/sky130A/
 ls -ltr
 ```
 
-📂 Sample Output:
+ Sample Output:
 ```
 libs.tech/     # Technology-specific data: magic, ngspice, klayout, etc.
 libs.ref/      # Reference libraries: standard cell libraries, IOs, macros
@@ -121,14 +121,14 @@ SOURCES        # Source info file for PDK installation
 
 ---
 
-📘 Inside `libs.tech/` – Contains tools-related tech files
+  Inside `libs.tech/` – Contains tools-related tech files
 
 ```bash
 cd libs.tech
 ls -ltr
 ```
 
-📂 Output:
+  Output:
 ```
 magic/       # For layout editing (used by Magic tool)
 ngspice/     # For simulation models
@@ -143,14 +143,14 @@ qflow/       # Digital flow tool
 
 ---
 
-📘 Inside `libs.ref/` – Contains standard cells, IOs, macros
+  Inside `libs.ref/` – Contains standard cells, IOs, macros
 
 ```bash
 cd ../libs.ref
 ls -ltr
 ```
 
-📂 Output:
+  Output:
 ```
 sky130_fd_sc_hd/     # High Density standard cells
 sky130_fd_sc_hs/     # High Speed standard cells
@@ -311,7 +311,7 @@ After synthesis, OpenLANE triggers the **Verilog backend**, which:
 - Maps cells to standard library
 - Dumps synthesized Verilog for `picorv32a`
 
-  **Yosys Info**:
+**Yosys Info**:
 
 - Version: 0.9+3621  
 - Optimizations: `abc`, `opt_expr`, etc.  
@@ -331,7 +331,7 @@ set output_delay = 4.946 ns
 set load         = 0.01765
 ```
 
- *STA Warnings (liberty files)*:
+*STA Warnings (liberty files)*:
 
 - Some operating conditions not found:  
   `ff_n40C_1v95`, `ss_100C_1v60`  
