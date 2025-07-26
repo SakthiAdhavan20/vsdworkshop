@@ -345,3 +345,21 @@ Fall Transition Time   = time(slew_high_fall_thr) - time(slew_low_fall_thr)
 **Combined Timing Definitions**  
 ![Timing Definitions Diagram](screenshots/Timing-Definitions-Diagram.png)
 
+---
+
+## Summary
+
+| Step                               | Status | Notes                                                                 |
+|------------------------------------|--------|-----------------------------------------------------------------------|
+| Floorplan Concepts                 | ✅     | Utilization, aspect ratio, decaps, pin blockage, power planning      |
+| Floorplanning in OpenLANE          | ✅     | Configured TCL files, ran `run_floorplan`, verified DEF              |
+| Magic Floorplan Visualization      | ✅     | Opened DEF in Magic, checked core/die area, IO pins, standard cells  |
+| Placement Run + Optimization       | ✅     | Ran `run_placement`, checked overflow log, visualized final layout   |
+| Cell Design Overview               | ✅     | Logic gates, cell types, and design flow with layout and circuit     |
+| Characterization Flow              | ✅     | GUNA tool flow with `.lib` generation, timing/noise/power models     |
+| Timing Parameter Definitions       | ✅     | Slew, delay thresholds and waveform visualizations                    |
+
+---
+
+
+
