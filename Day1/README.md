@@ -348,7 +348,11 @@ set load         = 0.01765
 
  *Negative slack* indicates **timing violations** that will be addressed in later stages (placement, CTS, routing).
 
-![run_synthesis_summary](screenshots/run_synthesis_summary.png)
+
+📷 Screenshot:
+![run_synthesis_summary](screenshots/run_synthesis_summary1.png)
+
+![run_synthesis_summary](screenshots/run_synthesis_summary2.png)
 
 ---
 
