@@ -1,202 +1,212 @@
-# 📦 Floorplanning in OpenLANE
+# Day 2 – Chip Floorplanning & Floorplan in OpenLANE
 
-## 📘 What is Floorplanning?
+## Floorplanning Concepts
 
-Floorplanning defines how your circuit is laid out inside the chip. It decides the size and shape of the core, where pins and power rails go, and where components can be placed.
-
-Key concepts:
-```shell
-Utilization Factor = Area occupied by netlist / Total core area
-Aspect Ratio      = Height / Width
-```
-
-👉 A Utilization Factor between **0.5–0.6** is ideal.  
-👉 100% utilization = no space for routing = ❌ bad design.
-
----
-
-### 🧠 Key Considerations:
-
-1. **Utilization & Aspect Ratio**  
-   - Keep space for routing and buffers.
-
-2. **Pre-placed Cells**  
-   - Fixed logic blocks manually placed before auto placement.
-
-3. **Decoupling Capacitors**  
-   - Placed near high-current logic blocks to maintain voltage stability.
-
-4. **Power Rails**  
-   - Mesh structure with multiple VDD/VSS pins to avoid noise issues.
-
-5. **IO Pin Placement**  
-   - Pins are placed between the core and die boundary.
-
-6. **Placement Blockages**  
-   - Prevent cells from being placed over pins or blocked areas.
-
-<p align="center">
-  <img width="750" height="400" src="../images/20.png">
-</p>
-
-<p align="center">
-  <img width="1000" height="600" src="../images/19.png">
-</p>
-
----
-
-## 🧪 LAB: Floorplan in OpenLANE
-
----
-
-### 📂 Step 1: Config Files
-
-Go to OpenLANE's configuration directory:
+### 1. Utilization Factor & Aspect Ratio
 
 ```bash
-cd openlane/configuration/
+Utilisation Factor =  Area occupied by netlist
+                     --------------------------
+                        Total area of core
+
+Aspect Ratio = Height / Width
 ```
 
-📁 Priority of config files:
-1. `floorplan.tcl` – lowest
-2. `config.tcl`
-3. `sky130_fd_sc_hd_config.tcl` – highest
-
-<p align="center">
-  <img width="1000" height="250" src="../images/21.png">
-</p>
-
-<p align="center">
-  <img width="800" height="400" src="../images/24.png">
-</p>
-
-<p align="center">
-  <img width="800" height="350" src="../images/23.png">
-</p>
-
-<p align="center">
-  <img width="800" height="250" src="../images/22.png">
-</p>
+- Utilization Factor ≈ 0.5–0.6 in practice.  
+- 100% utilization leaves no space for routing or buffers.  
+- Aspect Ratio is used to control layout shape.
 
 ---
 
-### ▶️ Step 2: Run Floorplan
+### 2. Fix Location of Pre-Placed Cells
 
-Enter OpenLANE shell:
-
-```tcl
-% run_floorplan
-```
-
-DEF file will be saved at:
-
-```
-openlane/designs/picorv32a/runs/<date>/results/floorplan/picorv32a.floorplan.def
-```
-
-<p align="center">
-  <img width="900" height="450" src="../images/diearea.png">
-</p>
+- Pre-placed cells (like macros) are positioned manually before automated placement begins.
+- Their location must be set in advance and will not be adjusted by tools.
 
 ---
 
-### 🧮 Step 3: Die Area Calculation
+### 3. Add Decoupling Capacitors
 
-```shell
+- Preplaced cells demand large current during switching.
+- Due to resistance/inductance in wires, voltage can drop.
+- Decaps help supply fast-switching current locally to maintain voltage levels within the noise margin.
+
+---
+
+### 4. Power Rails (Mesh)
+
+- Decaps can’t be placed everywhere.
+- A power mesh ensures:
+  - Nearby VDD/VSS availability
+  - Reduced voltage dips and ground bounces during switching
+
+---
+
+### 5. Placement of Pins
+
+- I/O Pins are placed in the area between core and die boundary.
+- Their position is chosen based on connectivity with cells.
+
+---
+
+### 6. Block Placement in Pin Region
+
+- Block placement in areas where I/O pins are located.
+- Ensures no cells are placed near the boundary to avoid congestion.
+
+📷 Screenshot:  
+![logical-blockage](screenshots/20.png)
+
+📷 Screenshot:  
+![pin-boundaries](screenshots/19.png)
+
+---
+
+## LAB – Floorplanning with OpenLANE
+
+### Step 1: Understand Configuration Hierarchy
+
+- Floorplan settings are defined in OpenLANE config files.
+- Priority order (low to high):
+  1. `floorplan.tcl`
+  2. `config.tcl`
+  3. `sky130A_sky130_fd_sc_hd_config.tcl`
+
+📷 Screenshot:  
+![config-folder](screenshots/21.png)
+
+📷 Screenshot:  
+![config-order-1](screenshots/24.png)
+
+📷 Screenshot:  
+![config-order-2](screenshots/23.png)
+
+📷 Screenshot:  
+![floorplan-tcl](screenshots/22.png)
+
+---
+
+### Step 2: Run Floorplan
+
+```bash
+run_floorplan
+```
+
+- Output DEF file generated at:
+  ```
+  openlane/designs/picorv32a/runs/<date>/results/floorplan/picorv32a.floorplan.def
+  ```
+
+📷 Screenshot:  
+![def-terminal](screenshots/diearea.png)
+
+### Calculate Die Area
+
+```bash
 DIEAREA (0 0) (554570 565290)
-Unit distance = 1000
-Area = (554.57 µm * 565.29 µm) ≈ 311829.16 µm²
-```
+Unit = 1000 microns
 
-📖 [Read about DEF](https://ivlsi.com/design-exchange-format-def-in-vlsi-physical-design/) | [Official DEF Spec](https://coriolis.lip6.fr/doc/lefdef/lefdefref/LEFSyntax.html)
+Area = (554570 / 1000) * (565290 / 1000)
+     = 311829.1653 microns²
+```
 
 ---
 
-### 🧰 Step 4: Open DEF in Magic
+### Step 3: View DEF in Magic
 
 ```bash
-magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech \
-      lef read ../../tmp/merged.lef \
-      def read picorv32a.floorplan.def &
+magic -T /path/to/sky130A.tech \
+  lef read ../../tmp/merged.lef \
+  def read picorv32a.floorplan.def &
 ```
 
-<p align="center">
-  <img width="900" height="450" src="../images/25.png">
-</p>
+📷 Screenshot:  
+![layout-in-magic](screenshots/25.png)
 
 ---
 
-### 📌 Step 5: Inspect Layout
+### Step 4: Check I/O Pins
 
-**IO Pins (equidistant)**
+- Input pins are placed equally along the boundary.
+- Controlled by `FP_IO_MODE = 1`.
 
-<p align="center">
-  <img width="900" height="400" src="../images/31.png">
-</p>
-
-**Use `what` in tkcon to identify components**
-
-<p align="center">
-  <img width="900" height="450" src="../images/26.png">
-</p>
-
-<p align="center">
-  <img width="900" height="450" src="../images/27.png">
-</p>
-
-<p align="center">
-  <img width="900" height="450" src="../images/28.png">
-</p>
-
-<p align="center">
-  <img width="900" height="450" src="../images/29.png">
-</p>
-
-**Standard Cells in Bottom-Left**
-
-<p align="center">
-  <img width="900" height="450" src="../images/30.png">
-</p>
+📷 Screenshot:  
+![io-pins](screenshots/31.png)
 
 ---
 
-### 📋 Step 6: Review Config Parameters
+### Step 5: Inspect Components in Magic
 
-Check output config:
+Use tkcon window:
+1. Select a component
+2. Type:
 
 ```bash
-openlane/designs/picorv32a/runs/<date>/config.tcl
+what
 ```
 
-<p align="center">
-  <img width="900" height="450" src="../images/32.png">
-</p>
-
-🧠 Notes:
-- `FP_CORE_UTIL` was overridden from 65 → 50 by highest-priority config file.
-- `FP_IO_VMETAL`, `FP_IO_HMETAL` were also overridden.
+📷 Screenshot:  
+![component-1](screenshots/26.png)  
+📷 Screenshot:  
+![component-2](screenshots/27.png)  
+📷 Screenshot:  
+![component-3](screenshots/28.png)  
+📷 Screenshot:  
+![component-4](screenshots/29.png)
 
 ---
 
-### 🧾 Step 7: View Floorplan Logs
+### Step 6: Check Standard Cells
 
-Check logs:
+- Standard cells will appear at the bottom-left area of the layout.
+
+📷 Screenshot:  
+![std-cells](screenshots/30.png)
+
+---
+
+## Config Parameters Used
+
+Inside:
+
+```bash
+openlane/designs/picorv32a/runs/<date>/
+```
+
+Important files/folders:
+- `config.tcl`
+- `results/`
+- `reports/`
+- `logs/`
+- `cmds.log`
+- `tmp/`
+
+📷 Screenshot:  
+![output-config](screenshots/32.png)
+
+- `FP_IO_HMETAL` and `FP_IO_VMETAL` values were overridden from defaults.
+- `FP_CORE_UTIL` set to 65 in one file, but overwritten to 50 due to higher-priority config.
+
+---
+
+## Debug Floorplan Logs
+
+Logs are available here:
 
 ```bash
 openlane/designs/picorv32a/runs/<date>/logs/floorplan/
 ```
 
-<p align="center">
-  <img width="1000" height="200" src="../images/33.png">
-</p>
+📷 Screenshot:  
+![log-dir](screenshots/33.png)
 
-<p align="center">
-  <img width="1000" height="350" src="../images/34.png">
-</p>
+📷 Screenshot:  
+![ioplacer-log](screenshots/34.png)
 
 ---
 
-✅ **Completed Floorplan Successfully!**
+## References
 
----
+- [DEF Format Overview](https://ivlsi.com/design-exchange-format-def-in-vlsi-physical-design/)
+- [DEF 5.8 Language Reference](https://coriolis.lip6.fr/doc/lefdef/lefdefref/LEFSyntax.html)
 
