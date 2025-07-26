@@ -228,3 +228,136 @@ def read picorv32a.placement.def &
 ![Zoomed placement layout](../images/38.png)
 
 
+# Cell Design and Characterization Flows
+
+---
+
+![Overview of Cell Design Flow](../images/39.png)
+
+In each step of the RTL to GDSII flow, the key building blocks are `cells` or `gates`.
+
+![Logic gates](../images/40.png)
+
+---
+
+### How Do We Model or Characterize These Cells or Gates?
+
+![Standard Cell Types](../images/41.png)
+
+- A standard cell can have:
+  - Different sizes
+  - Different functionalities
+  - Different threshold voltages (Vt)
+
+These cells are designed using the following **cell design flow**:
+
+---
+
+![Cell Design Flow](../images/42.png)
+
+**CELL DESIGN FLOW**
+
+---
+
+![Inputs for Cell Design](../images/43.png)
+
+**Inputs for cell design flow:**  
+- DRC & LVS rules  
+- SPICE models  
+- Library files  
+- User-defined specifications  
+
+---
+
+![Circuit and Layout Design Steps](../images/44.png)
+
+**Design Steps:**  
+- Circuit design  
+- Layout design  
+
+---
+
+## Characterization Flow
+
+1. Read in the Model Files (PMOS, NMOS, etc.)
+2. Read the extracted SPICE netlist
+3. Recognize the behavior of the buffers
+4. Read the sub-circuits (e.g., inverter)
+5. Attach necessary power sources
+6. Apply the input stimulus
+7. Provide output capacitances
+8. Include necessary simulation commands (e.g., transient or DC analysis)
+
+---
+
+![Characterization Inputs and Config](../images/45.png)
+
+![Timing Noise Power Extraction](../images/46.png)
+
+![GUNA Output Models](../images/47.png)
+
+---
+
+From steps 1–8, a configuration file is generated and fed to the characterization tool **GUNA**.  
+GUNA produces:
+
+- Timing models  
+- Noise models  
+- Power models  
+- `.lib` files (Timing, Noise, Power, Functionality)
+
+# General Timing Characterization Parameters
+
+---
+
+```shell
+Timing Parameter Definitions
+
+Timing Definition           Value
+--------------------------  ----------------------------
+slew_low_rise_thr           20% value of max value
+slew_high_rise_thr          80% value of max value
+slew_low_fall_thr           20% value of max value
+slew_high_fall_thr          80% value of max value
+in_rise_thr                 50% value of max value
+in_fall_thr                 50% value of max value 
+out_rise_thr                50% value of max value
+out_fall_thr                50% value of max value
+```
+
+---
+
+This graph shows two inverters connected in series.  
+- Red: output of the first inverter  
+- Blue: output of the second inverter  
+- Threshold points for slew and delay are annotated.
+
+![Two Inverters with Threshold Markings](../images/48.png)
+
+---
+
+Below are timing graphs for propagation delays.  
+Red = Input, Blue = Output of the buffer.
+
+**Rise Delay Graph**  
+![Rise Delay Graph](../images/49.png)
+
+**Fall Delay Graph**  
+![Fall Delay Graph](../images/50.png)
+
+---
+
+```shell
+Rise Delay             = time(out_rise_thr) - time(in_rise_thr)
+Fall Delay             = time(out_fall_thr) - time(in_fall_thr)
+Rise Transition Time   = time(slew_high_rise_thr) - time(slew_low_rise_thr)
+Fall Transition Time   = time(slew_high_fall_thr) - time(slew_low_fall_thr)
+```
+
+---
+
+**Combined Timing Definitions**  
+![Timing Definitions Diagram](../images/51.png)
+
+
+
