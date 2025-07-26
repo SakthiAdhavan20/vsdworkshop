@@ -44,7 +44,7 @@
 ![riscv-diagram](Screenshots/riscv-diagram.png)
 
 ---
-
+isa-to-hardware.png
 ### 🔸 2. From Software Applications to Hardware
 
 - Software is written in C, compiled to assembly (e.g., RISC-V), executed on hardware  
@@ -53,6 +53,9 @@
 
 📷 Screenshot:  
 ![software-to-hardware](Screenshots/software-to-hardware.png)
+
+📷 Screenshot:  
+![isa-to-hardware](Screenshots/isa-to-hardware.png)       
 
 ---
 
