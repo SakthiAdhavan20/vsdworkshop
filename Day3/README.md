@@ -49,38 +49,38 @@ We visualize each fabrication step layer-by-layer using Magic.
 
 ### 3.1 Active Region  
 📷 Screenshot:  
-![active](screenshots/56.png)
+![active](screenshots/active.png)
 
 ### 3.2 N-well and P-well  
 📷 Screenshot:  
-![well](screenshots/57.png)
+![well](screenshots/well.png)
 
 ### 3.3 Gate Terminal Formation  
 📷 Screenshot:  
-![gate](screenshots/58.png)
+![gate](screenshots/gate.png)
 
 ### 3.4 LDD Formation  
 📷 Screenshot:  
-![ldd](screenshots/60.png)
+![ldd](screenshots/ldd.png)
 
 ### 3.5 Source/Drain Formation  
 📷 Screenshot:  
-![source_drain](screenshots/61.png)
+![source_drain](screenshots/source_drain.png)
 
 ### 3.6 Local Interconnect Formation  
 📷 Screenshot:  
-![local_interconnect](screenshots/62.png)
+![local_interconnect](screenshots/local_interconnect.png)
 
 ### 3.7 Higher-Level Metal Formation  
 📷 Screenshot:  
-![metal](screenshots/63.png)
+![metal](screenshots/metal.png)
 
 ### 3.8 Final Complete Layout  
 📷 Screenshot:  
-![layout_final](screenshots/64.png)
+![layout_final](screenshots/layout_final.png)
 
 📷 Screenshot:  
-![layout_combined](screenshots/65.png)
+![layout_combined](screenshots/layout_combined.png)
 
 ---
 
