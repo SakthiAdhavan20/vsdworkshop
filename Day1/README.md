@@ -97,28 +97,80 @@
 
 ---
 
-### 🔸 6. OpenLANE Directory Structure in Detail
+### 🔸 6. sky130A PDK Directory Structure
 
-Run this from the `openlane/` folder:
+Once OpenLANE is installed, the Platform Development Kit (PDK) for Sky130 is downloaded under the path:
+
+`~/Desktop/work/tools/openlane_working_dir/pdks/sky130A/`
+
+---
+
+Run the following to explore the PDK structure:
 
 ```bash
-cd ~/Desktop/work/tools/openlane_working_dir/openlane/
-tree vsdstdcelldesign
+cd ~/Desktop/work/tools/openlane_working_dir/pdks/sky130A/
+ls -ltr
 ```
 
-Sample Output:
+📂 Sample Output:
 ```
-vsdstdcelldesign/
-├── config.tcl
-├── runs/
-│   └── vsdstdcelldesign/
-│       ├── logs/
-│       ├── results/
-│       ├── tmp/
+libs.tech/     # Technology-specific data: magic, ngspice, klayout, etc.
+libs.ref/      # Reference libraries: standard cell libraries, IOs, macros
+SOURCES        # Source info file for PDK installation
 ```
+
+---
+
+📘 Inside `libs.tech/` – Contains tools-related tech files
+
+```bash
+cd libs.tech
+ls -ltr
+```
+
+📂 Output:
+```
+magic/       # For layout editing (used by Magic tool)
+ngspice/     # For simulation models
+netgen/      # For LVS checking
+openlane/    # Tech data used by OpenLANE
+klayout/     # For viewing layouts
+irsim/       # For digital simulation
+xschem/      # For schematic capture
+xcircuit/    # Alternative schematic tool
+qflow/       # Digital flow tool
+```
+
+---
+
+📘 Inside `libs.ref/` – Contains standard cells, IOs, macros
+
+```bash
+cd ../libs.ref
+ls -ltr
+```
+
+📂 Output:
+```
+sky130_fd_sc_hd/     # High Density standard cells
+sky130_fd_sc_hs/     # High Speed standard cells
+sky130_fd_sc_ms/     # Medium Speed standard cells
+sky130_fd_sc_ls/     # Low Speed standard cells
+sky130_fd_sc_lp/     # Low Power standard cells
+sky130_fd_sc_hdll/   # High Density Low Leakage
+sky130_fd_sc_hvl/    # High Voltage Libraries
+sky130_fd_io/        # IO Cells
+sky130_sram_macros/  # SRAM Macros
+sky130_ml_xx_hd/     # Mixed-signal libraries
+sky130_fd_pr/        # Primitive devices (transistors, resistors, etc.)
+sky130_osu_sc_t18/   # OSU-based standard cells (for experimentation)
+```
+
+---
 
 📷 Screenshot:  
-![openlane-dir-structure](Screenshots/openlane-dir-structure.png)
+![sky130A PDK Directory](Screenshots/sky130A-pdk-directory.png)
+
 
 ---
 
