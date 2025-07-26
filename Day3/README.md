@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-In this session, we explore the physical layout of a CMOS inverter using the Magic VLSI tool and perform SPICE-level characterization using `ngspice` based on Sky130 PDK. We also dive into DRC (Design Rule Check) debugging and LEF extraction.
+In this session, we explore the physical layout of a CMOS inverter using the Magic VLSI tool and perform SPICE-level characterization using `ngspice` based on the Sky130 PDK. We also dive into DRC (Design Rule Check) debugging and LEF extraction.
 
 ---
 
@@ -10,24 +10,36 @@ In this session, we explore the physical layout of a CMOS inverter using the Mag
 
 ### 2.1 SPICE Deck Creation for CMOS Inverter
 
-The SPICE deck includes:
+To simulate the inverter's behavior at the transistor level, we create a SPICE netlist that includes transistor definitions, node connectivity, load capacitance, and simulation parameters. This netlist is executed using `ngspice`, which allows us to observe the transient switching characteristics of the circuit.
+
+The SPICE deck is typically saved as `sky130_inv.spice` in the same directory as the layout file created in Magic.
+
+---
+
+#### A typical SPICE deck includes:
+
 - Node definitions (`vdd`, `in`, `0`)
-- PMOS and NMOS descriptions
-- Load capacitance
-- Power source and pulse input
-- Library models for simulation
+- PMOS and NMOS transistor descriptions with connectivity (Drain-Gate-Source-Bulk)
+- Netlist describing circuit structure
+- Load capacitance at the output node
+- Input signal source (`PULSE` waveform)
+- Power rail setup (`vdd` and `gnd`)
+- Simulation control directives (e.g., `.tran`, `.dc`)
+- Library models for Sky130 PMOS and NMOS devices
+
+---
 
 📷 Screenshot:  
-![spice1](screenshots/52.png)
+![spice1](screenshots/spice1.png)
 
 📷 Screenshot:  
-![spice2](screenshots/53.png)
+![spice2](screenshots/spice2.png)
 
 📷 Screenshot:  
-![spice3](screenshots/54.png)
+![spice3](screenshots/spice3.png)
 
 📷 Screenshot:  
-![spice4](screenshots/55.png)
+![spice4](screenshots/spice4.png)
 
 ---
 
