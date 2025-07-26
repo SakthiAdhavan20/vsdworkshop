@@ -176,7 +176,7 @@ sky130_osu_sc_t18/   # OSU-based standard cells (for experimentation)
 
 ## 🧪 Practical Section – Lab Steps for Synthesis
 
-### 🔸 7. 🚀 OpenLANE Flow – Picorv32a Design (Sky130 PDK)
+### 🔸 7.OpenLANE Flow – Picorv32a Design (Sky130 PDK)
 
 This section documents running the `picorv32a` design using OpenLANE v0.21 and Sky130A PDK. The flow includes preparing the interactive session, running the `prep` step, and checking output directories.
 
