@@ -252,44 +252,103 @@ You can now access all intermediate folders:
 
 ### 🔸 8. Run Synthesis + Review Files
 
-```tcl
+```bash
 run_synthesis
 ```
 
-📤 Output:
-```
-[INFO]: Number of cells: 14876
-[INFO]: Number of DFF_X1 cells: 1613
-[INFO]: Synthesis complete!
-```
-
-📷 Screenshot:  
-![synthesis-log-output](Screenshots/synthesis-log-output.png)
-
-Check the log file manually:
-
-```bash
-runs/vsdstdcelldesign/logs/synthesis/1-yosys_0.log
-```
-
-📷 Screenshot:  
-![synthesis-log-file](Screenshots/synthesis-log-file.png)
+After running the above command, OpenLANE performs RTL synthesis using **Yosys** and generates a synthesized gate-level netlist for the design `picorv32a`.
 
 ---
 
-### 🔸 9. Steps to Characterize Synthesis Results
+#### 8.1 Synthesis Statistics – `picorv32a`
 
-Formula:
+After synthesis is complete, the following statistics are printed:
 
 ```
-Flop Ratio = (Number of DFFs / Total Cells) * 100
-           = (1613 / 14876) * 100 ≈ 10.84%
+=== picorv32a ===
+
+Number of wires:              14596  
+Number of wire bits:          14978  
+Number of public wires:        1565  
+Number of public wire bits:    1947  
+Number of memories:               0  
+Number of memory bits:            0  
+Number of processes:              0  
+Number of cells:              14876
 ```
 
-📷 Screenshot:  
-![flop-ratio-calculation](Screenshots/flop-ratio-calculation.png)  
-📷 Screenshot:  
-![highlight-yosys-log](screenshots/highlight-yosys-log.png)
+Below is a partial breakdown of the most-used standard cells:
+
+| Cell Name                  | Count | Description         |
+|---------------------------|-------|---------------------|
+| sky130_fd_sc_hd__dfxtp_2  | 1613  | D Flip-Flop         |
+| sky130_fd_sc_hd__inv_2    | 1615  | Inverter            |
+| sky130_fd_sc_hd__mux2_1   | 1224  | 2:1 Multiplexer     |
+| sky130_fd_sc_hd__or2_2    | 1088  | 2-input OR gate     |
+| sky130_fd_sc_hd__a2bb2o_2 | 1748  | Complex logic gate  |
+| ...                       | ...   | ...                 |
+
+---
+
+##### D Flip-Flop Ratio
+
+We calculate the ratio of sequential elements (flip-flops) to total cells:
+
+- **Total cells** = 14876  
+- **D Flip-Flops (dfxtp_2)** = 1613  
+- **DFF Ratio** = 1613 / 14876 ≈ **10.84%**
+
+This gives insight into the sequential vs. combinational logic density.
+
+---
+
+#### 8.2 Verilog Backend & Log Summary
+
+After synthesis, OpenLANE triggers the **Verilog backend**, which:
+
+- Optimizes logic via `abc`
+- Simplifies expressions via `opt_expr`
+- Maps cells to standard library
+- Dumps synthesized Verilog for `picorv32a`
+
+📝 **Yosys Info**:
+
+- Version: 0.9+3621  
+- Optimizations: `abc`, `opt_expr`, etc.  
+- Backend Module: `\picorv32a`  
+- Synthesized Netlist Output:  
+  `/openLANE_flow/designs/picorv32a/runs/<run>/results/synthesis/picorv32a.synthesis.v`
+
+---
+
+#### 8.3 Static Timing Analysis (STA)
+
+OpenLANE then runs **OpenSTA** for post-synthesis timing analysis.
+
+```tcl
+set input_delay  = 4.946 ns  
+set output_delay = 4.946 ns  
+set load         = 0.01765
+```
+
+⚠️ *STA Warnings (liberty files)*:
+
+- Some operating conditions not found:  
+  `ff_n40C_1v95`, `ss_100C_1v60`  
+- These will be resolved in later steps when proper corners are set.
+
+---
+
+#### 8.4 Timing Summary
+
+| Metric | Value       |
+|--------|-------------|
+| TNS    | -759.46 ns  |
+| WNS    | -24.89 ns   |
+
+ *Negative slack* indicates **timing violations** that will be addressed in later stages (placement, CTS, routing).
+
+![run_synthesis_summary](screenshots/run_synthesis_summary.png)
 
 ---
 
