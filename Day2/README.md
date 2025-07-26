@@ -172,7 +172,7 @@ Placement is performed in two stages:
 - **Global Placement** – Initial placement without legalization. It uses **HPWL (Half Perimeter Wire Length)** as the optimization metric.
 - **Detailed Placement** – Legalizes the placement by aligning cells to legal rows and eliminating overlaps.
 
-![Placement stages](../images/35.png)
+![Placement stages](Placement-stages.png)
 
 ---
 
@@ -192,7 +192,7 @@ This command executes:
 Objective: Minimize the **overflow value**  
 A successful placement run shows overflow values progressively decreasing with each iteration, indicating that the design is converging.
 
-![Placement overflow log](../images/36.png)
+![Placement overflow log](Placement-overflow-log.png)
 
 ---
 
@@ -207,7 +207,7 @@ openlane/designs/picorv32a/runs/<date>/results/placement/
 Important file:
 - `picorv32a.placement.def` – contains final standard cell positions in DEF format.
 
-![Placement DEF file](../images/37.png)
+
 
 ---
 
@@ -218,12 +218,12 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 lef read ../../tmp/merged.lef \
 def read picorv32a.placement.def &
 ```
-
+![Placement DEF file](Placement-DEF-file.png)
 ---
 
 ### Final Layout View
 
-![Zoomed placement layout](../images/38.png)
+![Zoomed placement layout](Zoomed-placement-layout.png)
 
 ---
 
