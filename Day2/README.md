@@ -163,3 +163,68 @@ magic -T sky130.tech \
 📷 Screenshot:  
 ![ioplacer-log](screenshots/ioplacer-log.png)
 
+# Library Binding and Placement
+
+### 📌 Placement Stage
+
+Placement is performed in two stages:
+
+- **Global Placement** – Initial placement without legalization. It uses **HPWL (Half Perimeter Wire Length)** as the optimization metric.
+- **Detailed Placement** – Legalizes the placement by aligning cells to legal rows and eliminating overlaps.
+
+![Placement stages](../images/35.png)
+
+---
+
+###  LAB: Running Placement in OpenLANE
+
+To run placement, use the command:
+
+```bash
+run_placement
+```
+
+This command executes:
+
+- **Global placement** using the `RePlAce` engine
+- **Detailed placement** using the `OpenDP` tool (Open-Source Detailed Placer)
+
+✅ **Objective**: Minimize the **overflow value**  
+A successful placement run shows overflow values progressively decreasing with each iteration, indicating that the design is converging.
+
+![Placement overflow log](../images/36.png)
+
+---
+
+###  Placement Output Directory
+
+After placement is completed, the output files will be generated in:
+
+```
+openlane/designs/picorv32a/runs/<date>/results/placement/
+```
+
+Important file:
+- `picorv32a.placement.def` – contains final standard cell positions in DEF format.
+
+![Placement DEF file](../images/37.png)
+
+---
+
+### Visualizing the Placement in Magic
+
+To visualize the placed layout in Magic, use this command:
+
+```bash
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech \
+lef read ../../tmp/merged.lef \
+def read picorv32a.placement.def &
+```
+
+---
+
+###  Final Layout View
+
+![Zoomed placement layout](../images/38.png)
+
+
