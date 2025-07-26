@@ -285,8 +285,6 @@ These cells are designed using the following **cell design flow**:
 
 ![Timing Noise Power Extraction](screenshots/Timing-Noise-Power-Extraction.png)
 
-![GUNA Output Models](screenshots/GUNA-Output-Models.png)
-
 From steps 1–8, a configuration file is generated and fed to the characterization tool [GUNA](https://github.com/Cloud-V/GUNA).  
 GUNA produces:
 
@@ -295,6 +293,7 @@ GUNA produces:
 - Power models  
 - `.lib` files (Timing, Noise, Power, Functionality)
 
+![GUNA Output Models](screenshots/GUNA-Output-Models.png)
 ---
 
 # General Timing Characterization Parameters
