@@ -176,28 +176,77 @@ sky130_osu_sc_t18/   # OSU-based standard cells (for experimentation)
 
 ## 🧪 Practical Section – Lab Steps for Synthesis
 
-### 🔸 7. Design Preparation Step
+### 🔸 7. 🚀 OpenLANE Flow – Picorv32a Design (Sky130 PDK)
+
+This section documents running the `picorv32a` design using OpenLANE v0.21 and Sky130A PDK. The flow includes preparing the interactive session, running the `prep` step, and checking output directories.
+
+---
+
+## ✅ Step 1 – Launch Docker and Start OpenLANE Flow
 
 ```bash
 cd ~/Desktop/work/tools/openlane_working_dir/openlane/
+docker
+```
+
+Inside Docker shell:
+
+```tcl
 ./flow.tcl -interactive
 ```
 
-Then in the TCL prompt:
+Then at `%` prompt:
 
 ```tcl
-prep -design vsdstdcelldesign
-```
-
-📤 Output:
-```
-[INFO]: Creating directory ./runs/vsdstdcelldesign
-[INFO]: Copying source files...
-[INFO]: Preparation complete.
+package require openlane 0.9
 ```
 
 📷 Screenshot:  
-![design-prep-output](Screenshots/design-prep-output.png)
+![Step 1 - Docker Interactive](Screenshots/step1_docker_interactive.png)
+
+---
+
+## ✅ Step 2 – Prepare the Picorv32a Design
+
+Inside the interactive OpenLANE shell:
+
+```tcl
+prep -design picorv32a
+```
+
+This step:
+
+- Loads configuration from `config.tcl`
+- Initializes PDK and Standard Cells
+- Merges LEF/Liberty files
+- Final message: **Preparation complete**
+
+📷 Screenshot:  
+![Step 2 - Prep Design check](Screenshots/step2_prep_design_check.png)
+
+📷 Screenshot:  
+![Step 2 - Prep Design](Screenshots/step2_prep_design.png)
+
+---
+
+## ✅ Step 3 – Explore Design Run and Temporary Files
+
+```bash
+cd designs/picorv32a/runs/
+cd 26-07_06-22/
+cd tmp/
+ls -ltr
+```
+
+You can now access all intermediate folders:
+
+- `floorplan/`, `synthesis/`, `routing/`, etc.
+- Files like `merged.lef`, `trimmed.lib`, `met_layers_list.txt`
+
+📷 Screenshot:  
+![Step 3 - Explore tmp Folder](Screenshots/step3_explore_tmp_folder.png)
+
+---
 
 ---
 
