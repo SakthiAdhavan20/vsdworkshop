@@ -29,16 +29,16 @@ The SPICE deck is typically saved as `sky130_inv.spice` in the same directory as
 
 ---
 
-📷 Screenshot:  
+  
 ![spice1](screenshots/spice1.png)
 
-📷 Screenshot:  
+  
 ![spice2](screenshots/spice2.png)
 
-📷 Screenshot:  
+ 
 ![spice3](screenshots/spice3.png)
 
-📷 Screenshot:  
+  
 ![spice4](screenshots/spice4.png)
 
 ---
@@ -48,38 +48,38 @@ The SPICE deck is typically saved as `sky130_inv.spice` in the same directory as
 We visualize each fabrication step layer-by-layer using Magic.
 
 ### 3.1 Active Region  
-📷 Screenshot:  
+  
 ![active](screenshots/active.png)
 
 ### 3.2 N-well and P-well  
-📷 Screenshot:  
+  
 ![well](screenshots/well.png)
 
 ### 3.3 Gate Terminal Formation  
-📷 Screenshot:  
+  
 ![gate](screenshots/gate.png)
 
 ### 3.4 LDD Formation  
-📷 Screenshot:  
+  
 ![ldd](screenshots/ldd.png)
 
 ### 3.5 Source/Drain Formation  
-📷 Screenshot:  
+ 
 ![source_drain](screenshots/source_drain.png)
 
 ### 3.6 Local Interconnect Formation  
-📷 Screenshot:  
+ 
 ![local_interconnect](screenshots/local_interconnect.png)
 
 ### 3.7 Higher-Level Metal Formation  
-📷 Screenshot:  
+  
 ![metal](screenshots/metal.png)
 
 ### 3.8 Final Complete Layout  
-📷 Screenshot:  
+ 
 ![layout_final](screenshots/layout_final.png)
 
-📷 Screenshot:  
+  
 ![layout_combined](screenshots/layout_combined.png)
 
 ---
@@ -92,7 +92,7 @@ We visualize each fabrication step layer-by-layer using Magic.
 git clone https://github.com/nickson-jose/vsdstdcelldesign.git
 ```
 
-📷 Screenshot:  
+  
 ![git_clone](screenshots/66.png)
 
 ### 4.2 Open Inverter Layout in Magic
@@ -101,25 +101,25 @@ git clone https://github.com/nickson-jose/vsdstdcelldesign.git
 magic -T sky130A.tech sky130_inv.mag
 ```
 
-📷 Screenshot:  
+ 
 ![magic_open](screenshots/67.png)
 
-📷 Screenshot:  
+ 
 ![magic_layers1](screenshots/68.png)
 
-📷 Screenshot:  
+  
 ![magic_layers2](screenshots/69.png)
 
-📷 Screenshot:  
+  
 ![magic_layers3](screenshots/70.png)
 
-📷 Screenshot:  
+  
 ![magic_layers4](screenshots/71.png)
 
-📷 Screenshot:  
+  
 ![magic_layers5](screenshots/72.png)
 
-📷 Screenshot:  
+ 
 ![magic_layers6](screenshots/73.png)
 
 ---
