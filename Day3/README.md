@@ -88,22 +88,29 @@ We visualize each fabrication step layer-by-layer using Magic.
 
 ### 4.1 Clone Inverter Layout Design
 
+- to work in the futher labs clone(download) the below repository at the location `/Desktop/work/tools/openlane_working_dir/openlane`
+
 ```bash
 git clone https://github.com/nickson-jose/vsdstdcelldesign.git
 ```
-
-  
+ 
 ![git_clone](screenshots/git_clone.png)
 
+- these are the files and folders are in the `vsdstdcelldesign` repo
+
 ### 4.2 Open Inverter Layout in Magic
+
+- to open the `sky130_inv.mag` file in magic the command is
 
 ```bash
 magic -T sky130A.tech sky130_inv.mag
 ```
 
- 
+- the image below is an inverter layout
+
 ![magic_open](screenshots/magic_open.png)
 
+- the images below shows about different layers and interconnects in the inverter layout
  
 ![magic_layers1](screenshots/magic_layers1.png)
 
@@ -126,32 +133,35 @@ magic -T sky130A.tech sky130_inv.mag
 
 ### 4.3 Extract LEF and SPICE Netlist
 
+- to extract lef file from layout using the below commands in the `tkon` window 
+
 ```bash
 extract all
 ext2spice sky130_inv.ext
 ext2spice
 ```
-
-  
 ![ext2spice](screenshots/ext2spice.png)
 
+- two files `sky130_inv.ext` and `sky130_inv.spice` are created
   
 ![ext_files](screenshots/ext_files.png)
 
-  
+- the `sky130_inv.ext` file is containing the following contents 
+ 
 ![ext_content](screenshots/ext_content.png)
 
 ---
 
 ## 5. Final SPICE Deck with Sky130 Tech
 
-### 5.1 Modify `.option scale`  
-:  
+### 5.1 Modify `.option scale`:  
 ![scale_option](screenshots/77.png)
 
 ### 5.2 Use Correct Models  
-- `pshort_model.0` for PMOS  
-- `nshort_model.0` for NMOS  
+
+- `pshort_model.0` for PMOS 
+
+- `nshort_model.0` for NMOS
 
   
 ![lib_model](screenshots/79.png)
