@@ -26,7 +26,8 @@
 ![Processor/SoC](Screenshots/Processor-SoC.png)
 
 📷 Screenshot:  
-![ATMega32u4-RISC-based-microcontroller](Screenshots/ATMega32u4 RISC-based microcontroller.png)
+![ATMega32u4-RISC-based-microcontroller](Screenshots/ATMega32u4%20RISC-based%20microcontroller.png)
+
 
 📷 Screenshot:  
 ![chip-package-core](Screenshots/chip-package-core.png)
