@@ -329,10 +329,10 @@ Below are timing graphs for propagation delays.
 Red = Input, Blue = Output of the buffer.
 
 **Rise Delay Graph**  
-![Rise Delay Graph](screenshots/Rise-Delay-Graph.png)
+![Rise Delay Graph](screenshots/Fall-Delay-Grap.png)
 
 **Fall Delay Graph**  
-![Fall Delay Graph](screenshots/Fall-Delay-Grap.png)
+![Fall Delay Graph](screenshots/Rise-Delay-Graph.png)
 
 ```shell
 Rise Delay             = time(out_rise_thr) - time(in_rise_thr)
