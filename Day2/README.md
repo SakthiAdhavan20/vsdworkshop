@@ -321,7 +321,7 @@ This graph shows two inverters connected in series.
 - Blue: output of the second inverter  
 - Threshold points for slew and delay are annotated.
 
-![Two Inverters with Threshold Markings](screenshots/../images/48.png)
+![Two Inverters with Threshold Markings](screenshots/Two-Inverters-with-Threshold-Markings.png)
 
 ---
 
@@ -329,10 +329,10 @@ Below are timing graphs for propagation delays.
 Red = Input, Blue = Output of the buffer.
 
 **Rise Delay Graph**  
-![Rise Delay Graph](screenshots/../images/49.png)
+![Rise Delay Graph](screenshots/Rise-Delay-Graph.png)
 
 **Fall Delay Graph**  
-![Fall Delay Graph](screenshots/../images/50.png)
+![Fall Delay Graph](screenshots/Fall-Delay-Grap.png)
 
 ```shell
 Rise Delay             = time(out_rise_thr) - time(in_rise_thr)
@@ -344,5 +344,5 @@ Fall Transition Time   = time(slew_high_fall_thr) - time(slew_low_fall_thr)
 ---
 
 **Combined Timing Definitions**  
-![Timing Definitions Diagram](screenshots/../images/51.png)
+![Timing Definitions Diagram](screenshots/Timing-Definitions-Diagram.png)
 
