@@ -15,8 +15,6 @@ Aspect Ratio = Height / Width
 - If Utilization = 1, there's no space left for routing or buffers. Typically, we keep it around 0.5–0.6.
 - Lower utilization allows space for routing wires and filler cells.
 
-![utilization-ratio](screenshots/utilization-ratio.png)
-
 ---
 
 ### 2. Concept of Pre-placed Cells
@@ -24,7 +22,6 @@ Aspect Ratio = Height / Width
 - Pre-placed cells (e.g., macros) must be fixed before automated placement.
 - These cannot be moved by place and route tools.
 
-![preplaced-cells](screenshots/preplaced-cells.png)
 
 ---
 
@@ -33,16 +30,12 @@ Aspect Ratio = Height / Width
 - High switching blocks may suffer from voltage drop due to wire resistance and inductance.
 - Decaps near those blocks ensure proper voltage levels by quickly supplying charge.
 
-![decaps-example](screenshots/decaps-example.png)
-
 ---
 
 ### 4. Power Planning
 
 - Large simultaneous switching causes IR drop and ground bounce.
 - Power mesh ensures stable power distribution via multiple VDD/VSS paths.
-
-![power-mesh](screenshots/power-mesh.png)
 
 ---
 
@@ -52,8 +45,7 @@ Aspect Ratio = Height / Width
 - Pin locations depend on cell placement.
 - Block cell placement near IO pins to prevent congestion.
 
-![pin-placement](screenshots/pin-placement.png)
-
+![placement-blockage](screenshots/placement-blockage1.png)
 ![placement-blockage](screenshots/placement-blockage.png)
 
 ---
@@ -69,6 +61,11 @@ Aspect Ratio = Height / Width
 
 ![floorplan-config-sources](screenshots/floorplan-config-sources.png)
 
+![floorplan-tcl](screenshots/floorplan-tcl.png)
+
+![config-tcl](screenshots/config-tcl.png)
+
+![sky130A_sky130_fd_sc_hd_config-tcl](screenshots/sky130A_sky130_fd_sc_hd_config-tcl.png)
 ---
 
 ### 7. Run Floorplan
@@ -81,6 +78,8 @@ Aspect Ratio = Height / Width
   `openlane/designs/picorv32a/runs/<date>/results/floorplan/picorv32a.floorplan.def`
 
 ![floorplan-run-output](screenshots/floorplan-run-output.png)
+
+![picorv32a-floorplan-def](screenshots/picorv32a-floorplan-def.png)
 
 ---
 
@@ -116,7 +115,21 @@ magic -T sky130.tech \
 - Equidistant input pins visible if `FP_IO_MODE = 1`.
 - Standard cells located at bottom left.
 
+![magic-floorplan](screenshots/magic-floorplan1.png)
+
+![magic-floorplan](screenshots/magic-floorplan2.png)
+
 ![magic-what](screenshots/magic-what.png)
+
+![magic-what](screenshots/magic-what1.png)
+
+![magic-what](screenshots/magic-what2.png)
+
+![magic-what](screenshots/magic-what3.png)
+
+![magic-what](screenshots/magic-what4.png)
+
+![magic-what](screenshots/magic-what5.png)
 
 ![magic-cells](screenshots/magic-cells.png)
 
