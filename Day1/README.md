@@ -23,6 +23,12 @@
 - **IP Blocks**: Pre-designed logic like PLLs, memories, etc., reused across chips  
 
 📷 Screenshot:  
+![Processor/SoC](screenshots/Processor-SoC.png)
+
+📷 Screenshot:  
+![ATMega32u4 RISC-based microcontroller](screenshots/ATMega32u4 RISC-based microcontroller.png)
+
+📷 Screenshot:  
 ![chip-package-core](screenshots/chip-package-core.png)
 
 ---
