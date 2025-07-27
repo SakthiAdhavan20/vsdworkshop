@@ -1,4 +1,4 @@
-#Sky130 Day 2: Good Floorplan vs Bad Floorplan and Introduction to Library Cells
+# Sky130 Day 2: Good Floorplan vs Bad Floorplan and Introduction to Library Cells
 
 ## Chip Floor Planning Considerations
 
