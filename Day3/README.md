@@ -155,7 +155,13 @@ ext2spice
 ## 5. Final SPICE Deck with Sky130 Tech
 
 ### 5.1 Modify `.option scale`:  
-![scale_option](screenshots/77.png)
+
+![scale_option](screenshots/scale_option1.png)
+
+![scale_option](screenshots/scale_option2.png)
+
+![scale_option](screenshots/scale_option.png)
+
 
 ### 5.2 Use Correct Models  
 
@@ -164,10 +170,11 @@ ext2spice
 - `nshort_model.0` for NMOS
 
   
-![lib_model](screenshots/79.png)
+![lib_model](screenshots/lib_model.png)
 
+![lib_model](screenshots/lib_model1.png)
   
-![final_spice](screenshots/78.png)
+![final_spice](screenshots/final_spice.png)
 
 ---
 
@@ -181,21 +188,21 @@ plot v(a) v(y)
 ```
 
 📷 Screenshot:  
-![ngspice_run](screenshots/80.png)
+![ngspice_run](screenshots/ngspice_run.png)
 
 📷 Screenshot:  
-![ngspice_plot](screenshots/81.png)
+![ngspice_plot](screenshots/ngspice_plot.png)
 
-📷 Screenshot:  
-![initial_waveform](screenshots/82.png)
 
 ### 6.2 Add Capacitance to Reduce Noise
 
-📷 Screenshot:  
-![noisy_wave](screenshots/83.png)
+![final_spice](screenshots/final_spice1.png)
 
 📷 Screenshot:  
-![clean_wave](screenshots/84.png)
+![noisy_wave](screenshots/noisy_wave.png)
+
+📷 Screenshot:  
+![clean_wave](screenshots/clean_wave.png)
 
 ---
 
@@ -207,10 +214,10 @@ plot v(a) v(y)
 - 80% of Vmax = 2.64V  
 
 📷 Screenshot:  
-![rise_zoom1](screenshots/85.png)
+![rise_zoom1](screenshots/rise_zoom1.png)
 
 📷 Screenshot:  
-![rise_zoom2](screenshots/86.png)
+![rise_zoom2](screenshots/rise_zoom2.png)
 
 📷 Screenshot:  
 ![rise_terminal](screenshots/87.png)
