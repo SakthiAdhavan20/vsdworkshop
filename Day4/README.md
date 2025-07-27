@@ -331,4 +331,79 @@ run_synthesis
 ![Fanout Update 4](../images/150.png)  
 ![Fanout Update 5](../images/151.png)
 
+# Clock Tree Synthesis (CTS) using TritonCTS and Signal Integrity
+
+## Introduction to CTS and Signal Integrity
+
+![CTS Intro](../images/152.png)
+
+![CTS Flow](../images/153.png)
+
+- So we go for `H-Tree` method
+
+![H-Tree Method](../images/154.png)
+
+![H-Tree Buffers](../images/155.png)
+
+- After adding buffers 👇
+
+![After Buffering](../images/156.png)
+
+## Clock Net Shielding 👇
+
+![Shielding Step 1](../images/158.png)
+
+![Shielding Step 2](../images/159.png)
+
+- therefore the clock net is shieled 
+
+![Shielded Clock Net](../images/157.png)
+
+## Lab Steps to run CTS using TritonCTS
+
+- From the previous labs, run until the placement stage using the commands:
+
+```tcl
+prep -design picorv32a -tag 16-03_17-49 -overwrite
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+set ::env(SYNTH_STRATEGY) "DELAY 0"
+set ::env(SYNTH_SIZING) 1
+
+run_synthesis
+init_floorplan
+place_io
+global_placement_or
+detailed_placement
+tap_decap_or
+detailed_placement
+```
+
+- After placement is done, we move on to the CTS stage and run it using the command:
+
+```tcl
+run_cts
+```
+
+- This uses `TritonCTS` inside OpenROAD to insert clock buffers and route the clock net.
+
+## Output After CTS Stage
+
+![CTS Output 1](../images/173.png)
+
+![CTS Output 2](../images/174.png)
+
+![CTS Output 3](../images/175.png)
+
+## Verifying if CTS is Run Properly or Not
+
+![CTS Verify 1](../images/176.png)
+
+![CTS Verify 2](../images/177.png)
+
+![CTS Verify 3](../images/178.png)
+
+
+
 
