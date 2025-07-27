@@ -156,10 +156,13 @@ ext2spice
 
 ### 5.1 Modify `.option scale`:  
 
+- Editing `.option scale` – 1
 ![scale_option](screenshots/scale_option1.png)
 
+- Editing `.option scale` – 2 
 ![scale_option](screenshots/scale_option2.png)
 
+- Final `.option scale` line
 ![scale_option](screenshots/scale_option.png)
 
 
@@ -169,10 +172,13 @@ ext2spice
 
 - `nshort_model.0` for NMOS
 
-  
+- PMOS and NMOS models added – 1 
 ![lib_model](screenshots/lib_model.png)
 
+- PMOS and NMOS models added – 2
 ![lib_model](screenshots/lib_model1.png)
+
+- Final SPICE deck with Sky130 models
   
 ![final_spice](screenshots/final_spice.png)
 
@@ -187,21 +193,26 @@ ngspice sky130_inv.spice
 plot v(a) v(y)
 ```
 
-📷 Screenshot:  
+- Terminal view of ngspice run 
 ![ngspice_run](screenshots/ngspice_run.png)
 
-📷 Screenshot:  
+- Output waveform from simulation
+  
 ![ngspice_plot](screenshots/ngspice_plot.png)
 
 
 ### 6.2 Add Capacitance to Reduce Noise
 
+- Final SPICE deck with added capacitance
+
 ![final_spice](screenshots/final_spice1.png)
 
-📷 Screenshot:  
+- Noisy output waveform
+ 
 ![noisy_wave](screenshots/noisy_wave.png)
 
-📷 Screenshot:  
+- Clean output waveform
+ 
 ![clean_wave](screenshots/clean_wave.png)
 
 ---
@@ -210,16 +221,17 @@ plot v(a) v(y)
 
 ### 7.1 Rise Transition
 
-- 20% of Vmax = 0.66V  
-- 80% of Vmax = 2.64V  
+- 20% of Vmax = 0.66V 
 
-📷 Screenshot:  
+- 80% of Vmax = 2.64V 
+
+- 20% rise voltage point
 ![rise_zoom1](screenshots/rise_zoom1.png)
 
-📷 Screenshot:  
+- 80% rise voltage point 
 ![rise_zoom2](screenshots/rise_zoom2.png)
 
-📷 Screenshot:  
+- Terminal log showing timing values
 ![rise_terminal](screenshots/87.png)
 
 ```
