@@ -1,4 +1,4 @@
-# Day 3 - Design Library Cell using Magic Layout and ngspice Characterization
+# Sky130 Day 3 - Design Library Cell using Magic Layout and ngspice Characterization
 
 ## 1. Introduction
 
