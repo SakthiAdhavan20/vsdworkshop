@@ -208,12 +208,127 @@ Solution: Shield them with power or ground.
 
 ---
 
-## 15. Summary
+# Timing analysis with ideal clocks using OpenSTA
 
-- We created a custom inverter cell and extracted LEF/lib.
-- Integrated it into OpenLANE synthesis and STA.
-- Used it to fix setup slack violations.
-- Performed CTS and analyzed signal integrity.
+![Timing Report 1](../images/137.png)  
+![Timing Report 2](../images/138.png)  
+![Timing Report 3](../images/139.png)  
+![Timing Report 4](../images/140.png)  
+![Timing Report 5](../images/141.png)
 
 ---
+
+### Lab Steps to configure OpenSTA for post-synth timing analysis
+
+```tcl
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a -tag 16-03_17-49 -overwrite
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+set ::env(SYNTH_SIZING) 1
+run_synthesis
+```
+
+> Before moving to post-synth analysis, complete the above steps.  
+> To perform post-synthesis timing analysis, first we need to add config files into our flow.
+
+Create a config file at:
+
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/pre_sta.conf
+```
+
+Add the following content:
+
+![pre_sta.conf](../images/142.png)
+
+```tcl
+set_cmd_units -time ns -capacitance pF -current mA -voltage V -resistance kOhm -distance um
+read_liberty -min /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib
+read_liberty -max /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib
+read_verilog /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/16-03_17-49/results/synthesis/picorv32a.synthesis.v
+link_design picorv32a
+read_sdc /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/my_base.sdc
+report_checks -path_delay min_max -fields {slew trans net cap input_pin}
+report_tns
+report_wns
+```
+
+Create the SDC file at:
+
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/my_base.sdc
+```
+
+Add the following content:
+
+![my_base.sdc](../images/143.png)
+
+```tcl
+set ::env(CLOCK_PORT) clk
+set ::env(CLOCK_PERIOD) 24.73
+set ::env(SYNTH_DRIVING_CELL) sky130_fd_sc_hd__inv_8
+set ::env(SYNTH_DRIVING_CELL_PIN) Y
+set ::env(SYNTH_CAP_LOAD) 17.65
+create_clock [get_ports $::env(CLOCK_PORT)]  -name $::env(CLOCK_PORT)  -period $::env(CLOCK_PERIOD)
+set IO_PCT  0.2
+set input_delay_value [expr $::env(CLOCK_PERIOD) * $IO_PCT]
+set output_delay_value [expr $::env(CLOCK_PERIOD) * $IO_PCT]
+puts "\[INFO\]: Setting output delay to: $output_delay_value"
+puts "\[INFO\]: Setting input delay to: $input_delay_value"
+
+set clk_indx [lsearch [all_inputs] [get_port $::env(CLOCK_PORT)]]
+#set rst_indx [lsearch [all_inputs] [get_port resetn]]
+set all_inputs_wo_clk [lreplace [all_inputs] $clk_indx $clk_indx]
+#set all_inputs_wo_clk_rst [lreplace $all_inputs_wo_clk $rst_indx $rst_indx]
+set all_inputs_wo_clk_rst $all_inputs_wo_clk
+
+# correct resetn
+set_input_delay $input_delay_value  -clock [get_clocks $::env(CLOCK_PORT)] $all_inputs_wo_clk_rst
+#set_input_delay 0.0 -clock [get_clocks $::env(CLOCK_PORT)] {resetn}
+set_output_delay $output_delay_value  -clock [get_clocks $::env(CLOCK_PORT)] [all_outputs]
+
+# TODO set this as parameter
+set_driving_cell -lib_cell $::env(SYNTH_DRIVING_CELL) -pin $::env(SYNTH_DRIVING_CELL_PIN) [all_inputs]
+set cap_load [expr $::env(SYNTH_CAP_LOAD) / 1000.0]
+puts "\[INFO\]: Setting load to: $cap_load"
+set_load  $cap_load [all_outputs]
+```
+
+Now go to the OpenLane directory and run:
+
+```bash
+sta pre_sta.conf
+```
+
+This performs post-synthesis timing analysis.
+
+![STA Output 1](../images/144.png)  
+![STA Output 2](../images/145.png)  
+![STA Output 3](../images/146.png)
+
+---
+
+### Changing MAX_FANOUT to 4 and Re-running Synthesis
+
+```tcl
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a -tag 16-03_17-49 -overwrite
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+set ::env(SYNTH_SIZING) 1
+set ::env(SYNTH_MAX_FANOUT) 4
+run_synthesis
+```
+
+---
+
+![Fanout Update 1](../images/147.png)  
+![Fanout Update 2](../images/148.png)  
+![Fanout Update 3](../images/149.png)  
+![Fanout Update 4](../images/150.png)  
+![Fanout Update 5](../images/151.png)
+
 
