@@ -1,76 +1,271 @@
-# Sky130 Day 4 – Pre-layout Timing Analysis and Clock Tree Optimization
+# Sky130 Day 4 – Pre-layout Timing Analysis and Importance of a Good Clock Tree
 
 ---
 
-# Sky130 Day 4 – Pre-layout Timing Analysis and Clock Tree Optimization
+## Timing Modelling using Delay Tables
 
 ---
 
-## 1. Convert Grid Info to Track Info and Verify Magic Layout
+## Lab Steps to Convert Grid Info to Track Info
 
-Before integrating a custom standard cell into the PnR flow, we need to ensure it aligns with the design track grid.
+We only require the `.lef` file, which contains the cell physical information; we don't need all the information in the `.mag` file.
 
-**Conditions to Meet:**
-- Ports must lie on intersections of horizontal and vertical tracks.  
-- Width should be an odd multiple of horizontal pitch.  
-- Height should be an even multiple of vertical pitch.
+So we have to extract the `.lef` file from the `.mag` file.
+
+This is the inverter we have seen from the previous labs.
+
+### Inverter Layout
+
+There are some conditions that need to be satisfied before we place standard cells into the PnR flow:
+
+- Input and output ports of the standard cell should lie on the intersection of the vertical and horizontal tracks.
+- Width of the standard cell should be odd multiples of the horizontal track pitch.
+- Height of the standard cell should be even multiples of the vertical track pitch.
+
+In the below location, we can find the `tracks.info` for `sky130_fd_sc_hd`.
+
+- Track Info 1  
+  ![Track Info](../images/153.png)
+
+- Track Info 2  
+  ![Track Info Zoom](../images/154.png)
+
+Initially the grid size looks like this:
+
+- **Original Grid**  
+  ![Original Grid](../images/155.png)
+
+Now resize the grid as per the dimensions in `tracks.info`:
+
+```
+grid 0.46um 0.34um 0.23um 0.17um
+```
+
+- **Resized Grid 1**  
+  ![Resized Grid 1](../images/156.png)
+
+- **Resized Grid 2**  
+  ![Resized Grid 2](../images/157.png)
+
+Here, the input and output ports (A and Y) are lying on the intersection of the vertical and horizontal pitch ✅
+
+- Horizontal track pitch = 0.46um → width = 3 × 0.46 = 1.38um ✅  
+- **Horizontal Track**  
+  ![Horizontal Track](../images/158.png)
+
+- Vertical track pitch = 0.34um → height = 8 × 0.34 = 2.72um ✅
+
+### Save Layout
 
 ```tcl
-grid 0.46um 0.34um 2 2
+save sky130_vsdinv.mag
+magic -T sky130A.tech sky130_vsdinv.mag &
 ```
 
-![Track Info 1](screenshots/137.png)
+- **New Layout File**  
+  ![Saved Magic](../images/159.png)
 
----
+Generate `.lef` file:
 
-## 2. Convert Magic Layout to Standard Cell LEF
-
-```bash
-magic -T sky130A.tech sky130_inv.mag
-```
-
-```magic
+```tcl
 lef write
 ```
 
-This will generate a `.lef` file for your inverter.
-
-![LEF Export](screenshots/138.png)
-
----
-
-## 3. Insert Custom Cell in `config.tcl`
-
-Edit your `openlane/designs/picorv32a/config.tcl`:
-
-```tcl
-set ::env(CELL_LEFS) "$::env(CELL_LEFS) /path/to/sky130_inv.lef"
-```
-
-Also add to:
-
-```tcl
-set ::env(LIB_SYNTH) "$::env(LIB_SYNTH) /path/to/sky130_inv.lib"
-set ::env(LIB_TYPICAL) "$::env(LIB_TYPICAL) /path/to/sky130_inv.lib"
-```
-
-![Config TCL Edit](screenshots/139.png)
+- **LEF Write**  
+  ![LEF Write Output](../images/160.png)
 
 ---
 
-## 4. Run Synthesis with Custom Inverter Cell
+## Copy `.lef` and `.lib` Files to OpenLANE src Directory
 
 ```bash
-cd openlane
-flow.tcl -design picorv32a -init_design_config
-flow.tcl -design picorv32a -tag vsdinv_synth -overwrite
+cp libs/sky130_fd_sc_hd__* ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+cp sky130_vsdinv.lef ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
 ```
 
-This will include the custom inverter in the netlist.
-
-![Synthesis Run](screenshots/140.png)
+- **Copied Files Result**  
+  ![Copied LEF and LIB](../images/161.png)
 
 ---
+
+## Update `config.tcl` with New File Paths
+
+```tcl
+set ::env(LIB_SYNTH) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+set ::env(LIB_SLOWEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib"
+set ::env(LIB_FASTEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib"
+set ::env(LIB_TYPICAL) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+
+set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]
+```
+
+- **Updated Config**  
+  ![Config.tcl Update](../images/162.png)
+
+---
+
+## Start OpenLANE Flow
+
+```tcl
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a -tag 16-03_17-49 -overwrite
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+run_synthesis
+```
+
+- **Run Synthesis 1**  
+  ![Synthesis 1](../images/163.png)
+
+- **Run Synthesis 2**  
+  ![Synthesis 2](../images/164.png)
+
+---
+
+## Delay Tables
+
+To avoid large skew between clock endpoints:
+
+- Buffers on the same level must have same load → same delay
+- Buffers must be identical across levels
+
+- **Delay Table 1**  
+  ![Delay 1](../images/165.png)
+
+- **Delay Table 2**  
+  ![Delay 2](../images/166.png)
+
+- **Delay Table 3**  
+  ![Delay 3](../images/167.png)
+
+- **Delay Table 4**  
+  ![Delay 4](../images/168.png)
+
+**Skew = 0** because delay on both paths = x9' + y15
+
+---
+
+## Steps to Configure Synthesis to Fix Slack
+
+View slack-related synthesis parameters in `README.md`
+
+- **Synthesis Params**  
+  ![Synthesis Param](../images/169.png)
+
+Update synthesis settings:
+
+```tcl
+prep -design picorv32a -tag 16-03_17-49 -overwrite
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+echo $::env(SYNTH_STRATEGY)
+set ::env(SYNTH_STRATEGY) "DELAY 0"
+
+echo $::env(SYNTH_BUFFERING)
+echo $::env(SYNTH_SIZING)
+set ::env(SYNTH_SIZING) 1
+
+echo $::env(SYNTH_DRIVING_CELL)
+
+run_synthesis
+```
+
+- **Updated Synth Output 1**  
+  ![Synthesis Output 1](../images/170.png)
+
+- **Updated Synth Output 2**  
+  ![Synthesis Output 2](../images/171.png)
+
+**Before:**
+
+```
+Chip area: 147712.918400
+tns: -711.59
+wns: -23.89
+```
+
+**After:**
+
+```
+Chip area: 196832.528000
+tns: 0
+wns: 0
+```
+
+To verify inverter inclusion, search `merged.lef` for `vsdinv`
+
+- **LEF verification 1**  
+  ![LEF Search](../images/172.png)
+
+- **LEF verification 2**  
+  ![LEF Search 2](../images/173.png)
+
+---
+
+## Floorplanning and Placement
+
+```tcl
+run_floorplan
+```
+
+If error appears, refer to OpenLANE commands documentation
+
+- **OpenLANE Error**  
+  ![Error Msg](../images/174.png)
+
+- **Commands Ref**  
+  ![Command Help](../images/175.png)
+
+Then run:
+
+```tcl
+init_floorplan
+place_io
+global_placement_or
+detailed_placement
+tap_decap_or
+detailed_placement
+```
+
+- **Floorplan**  
+  ![Floorplan](../images/176.png)
+
+- **Placement 1**  
+  ![Global Placement](../images/177.png)
+
+- **Placement 2**  
+  ![Detailed Placement](../images/178.png)
+
+- **Placement 3**  
+  ![Decap and Re-Placement](../images/179.png)
+
+---
+
+## View Placement in Magic
+
+```tcl
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech \
+lef read ../../tmp/merged.lef \
+def read picorv32a.placement.def &
+```
+
+- **Magic DEF 1**  
+  ![Magic View 1](../images/180.png)
+
+- **Magic DEF 2**  
+  ![Magic View 2](../images/181.png)
+
+- **Magic DEF 3**  
+  ![Magic View 3](../images/182.png)
+
+- **Magic DEF 4**  
+  ![Magic View 4](../images/183.png)
+
+- **Magic DEF 5**  
+  ![Magic View 5](../images/184.png)
+
 
 ## 5. Netlist and Cell Verification
 
