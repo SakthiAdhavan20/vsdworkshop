@@ -29,8 +29,8 @@ Before integrating a custom standard cell into the PnR flow, we need to ensure i
 grid 0.46um 0.34um 0.23um 0.17um
 ```
 
-![After Resize](screenshots/106.png) 
-![Final Grid](screenshots/107.png)
+![After Resize](screenshots/After_Resize.png) 
+![Final Grid](screenshots/Final_Grid.png)
 
 ---
 
