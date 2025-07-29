@@ -2,228 +2,215 @@
 
 ---
 
+# Sky130 Day 4 – Pre-layout Timing Analysis and Clock Tree Optimization
+
+---
+
 ## 1. Convert Grid Info to Track Info and Verify Magic Layout
 
 Before integrating a custom standard cell into the PnR flow, we need to ensure it aligns with the design track grid.
 
 **Conditions to Meet:**
-
-- Ports must lie on intersections of horizontal and vertical tracks. 
-- Width should be an odd multiple of horizontal pitch. 
+- Ports must lie on intersections of horizontal and vertical tracks.  
+- Width should be an odd multiple of horizontal pitch.  
 - Height should be an even multiple of vertical pitch.
 
-![Track Info 1](screenshots/inv.png) 
-
-### Grid and Track Info:
-
-![Track Info 1](screenshots/Track_Info_1.png) 
-![Track Info 2](screenshots/Track_Info_2.png)
-
-### Initial grid view in Magic:
-
-![Initial Grid View](screenshots/Initial_Grid_View.png)
-
-### Resize Grid in Magic:
-
 ```tcl
-grid 0.46um 0.34um 0.23um 0.17um
+grid 0.46um 0.34um 2 2
 ```
 
-![After Resize](screenshots/After_Resize.png) 
-![Final Grid](screenshots/Final_Grid.png)
+![Track Info 1](screenshots/137.png)
 
 ---
 
-## 2. Convert Magic Layout to LEF
-
-In the Magic layout window:
-
-```tcl
-lef write sky130_inv.lef
-```
-
-This generates a standard cell LEF file that will be used in the OpenLANE flow.
-
-![LEF Generation](screenshots/LEF_Generation1.png)
-
-![LEF Generation](screenshots/LEF_Generation.png)
-
-![LEF Generation](screenshots/LEF_Generation2.png)
-
-![LEF Generation](screenshots/LEF_Generation3.png)
----
-
-## 3. Add Custom Cell to OpenLANE Setup
-
-Open `config.tcl` of the design inside OpenLANE:
-
-```tcl
-set ::env(EXTRA_LEFS) "$::env(DESIGN_DIR)/src/sky130_inv.lef"
-set ::env(EXTRA_GDS_FILES) "$::env(DESIGN_DIR)/src/sky130_inv.gds"
-```
-
-![Config Edit](screenshots/Config_Edit.png)
-
-Make sure the custom cell Verilog and Liberty timing model (`sky130_inv.v` and `sky130_inv.lib`) are also copied into the design `src/` folder.
-
----
-
-## 4. Run Synthesis in OpenLANE
+## 2. Convert Magic Layout to Standard Cell LEF
 
 ```bash
-./flow.tcl -interactive
+magic -T sky130A.tech sky130_inv.mag
 ```
 
-```tcl
-package require openlane 0.9
-prep -design picorv32a -tag 26-07_06-22 -overwrite
-
-set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
-add_lefs -src $lefs
-
-run_synthesis
+```magic
+lef write
 ```
 
-![Synthesis 1](screenshots/Synthesis_1.png) 
-![Synthesis 2](screenshots/Synthesis_2.png)
+This will generate a `.lef` file for your inverter.
+
+![LEF Export](screenshots/138.png)
 
 ---
 
-## 5. Inverter Cell in Netlist
+## 3. Insert Custom Cell in `config.tcl`
 
-Check the synthesized netlist for the inverter cell:
+Edit your `openlane/designs/picorv32a/config.tcl`:
+
+```tcl
+set ::env(CELL_LEFS) "$::env(CELL_LEFS) /path/to/sky130_inv.lef"
+```
+
+Also add to:
+
+```tcl
+set ::env(LIB_SYNTH) "$::env(LIB_SYNTH) /path/to/sky130_inv.lib"
+set ::env(LIB_TYPICAL) "$::env(LIB_TYPICAL) /path/to/sky130_inv.lib"
+```
+
+![Config TCL Edit](screenshots/139.png)
+
+---
+
+## 4. Run Synthesis with Custom Inverter Cell
 
 ```bash
-cd runs/picorv32a/results/synthesis/
-gedit picorv32a.synthesis.v
+cd openlane
+flow.tcl -design picorv32a -init_design_config
+flow.tcl -design picorv32a -tag vsdinv_synth -overwrite
 ```
 
-Search for `sky130_inv`.
+This will include the custom inverter in the netlist.
 
-![Netlist Search](screenshots/117.png)
+![Synthesis Run](screenshots/140.png)
 
 ---
 
-## 6. Include Inverter Cell in Liberty
+## 5. Netlist and Cell Verification
 
-Make sure `sky130_inv.lib` is added in config.tcl:
+Open the synthesized Verilog and confirm that `sky130_inv` is used.
+
+```bash
+cat runs/vsdinv_synth/results/synthesis/picorv32a.v | grep sky130_inv
+```
+
+![Netlist Verification](screenshots/141.png)
+
+---
+
+## 6. Delay Table (lib) Setup and Format
+
+Your custom `.lib` file should have a delay table section like:
+
+```liberty
+cell (sky130_inv) {
+  ...
+  pin(A) {
+    direction : input;
+    ...
+  }
+  pin(Y) {
+    direction : output;
+    function : "A'";
+    ...
+    timing () {
+      related_pin : "A";
+      timing_sense : negative_unate;
+      cell_rise(delay_table) {...}
+      cell_fall(delay_table) {...}
+    }
+  }
+}
+```
+
+![Delay Table](screenshots/142.png)
+
+---
+
+## 7. Setup OpenSTA for Ideal Clock Timing Analysis
+
+```bash
+cd openlane/designs/picorv32a
+opensta
+```
 
 ```tcl
-set ::env(LIB_SYNTH) "$::env(DESIGN_DIR)/src/sky130_inv.lib"
+read_liberty /path/to/sky130_inv.lib
+read_verilog runs/vsdinv_synth/results/synthesis/picorv32a.v
+link_design picorv32a
+read_sdc runs/vsdinv_synth/results/synthesis/picorv32a.sdc
+report_checks -path_delay min_max
 ```
 
-![Liberty Include](screenshots/118.png)
+![OpenSTA Ideal Clocks](screenshots/143.png)
 
 ---
 
-## 7. Slack Violation and Delay Analysis
+## 8. Run TritonCTS (Clock Tree Synthesis)
 
-You can now simulate scenarios where slack violations occur, and analyze how `sky130_inv` can be inserted to improve delay.
+```bash
+flow.tcl -design picorv32a -tag vsdinv_cts -from cts
+```
 
-![Slack Info](screenshots/119.png)
+This step inserts and buffers clock tree using your given CTS buffer.
+
+![CTS Run](screenshots/144.png)
 
 ---
 
-## 8. Timing Analysis with Ideal Clock
+## 9. Post-CTS Setup & Hold Timing Analysis
+
+```bash
+cd runs/vsdinv_cts/results/cts
+opensta
+```
 
 ```tcl
-run_floorplan
-run_placement
-run_cts
-run_sta
+read_liberty /path/to/sky130_inv.lib
+read_verilog picorv32a.cts.v
+link_design picorv32a
+read_sdc picorv32a.sdc
+report_checks -path_delay min_max
 ```
 
-Observe slack and critical paths.
+Check for any setup or hold violations after CTS.
 
-![Timing STA 1](screenshots/137.png) 
-![Timing STA 2](screenshotss/138.png) 
-![Timing STA 3](screenshots/139.png)
+![Post-CTS Timing](screenshots/145.png)
 
 ---
 
-## 9. Delay Table Overview
+## 10. Slack Optimization using Synthesis Configuration
 
-Delay tables capture delay across combinations of input transition and output load.
-
-| Input Slew | Output Load | Delay (ns) |
-|------------|-------------|------------|
-| 0.1ns      | 5fF         | 0.22       |
-| 0.2ns      | 10fF        | 0.27       |
-
-These are extracted using SPICE-level simulation and used in `.lib` characterization.
-
-![Delay Table](screenshots/140.png)
-
----
-
-## 10. OpenSTA Analysis with Custom Inverter
-
-You can now re-run OpenSTA with a scenario where `sky130_inv` is placed between critical nodes.
+You can optimize slack by adjusting synthesis constraints in `config.tcl`:
 
 ```tcl
-read_verilog sky130_inv.v
-link_design sky130_inv
+set ::env(SYNTH_MAX_TRAN) 0.75
+set ::env(SYNTH_MAX_FANOUT) 4
+set ::env(SYNTH_STRATEGY) 2
 ```
 
-Analyze the new path and compare slack.
+Re-run synthesis and STA again.
 
-![STA with Custom INV](screenshots/141.png)
+![Slack Optimization](screenshots/146.png)
 
 ---
 
-## 11. Run TritonCTS for Real Clock Network
+## 11. Crosstalk and Shielding
+
+To minimize signal interference, ensure critical nets are shielded.
+
+Use:
 
 ```tcl
-run_cts
+set ::env(PL_TARGET_DENSITY) 0.50
+set ::env(FP_PDN_VOFFSET) 10
 ```
 
-This performs H-Tree based clock distribution and inserts clock buffers.
+Then re-run `flow.tcl`.
 
-![CTS Result 1](screenshots/142.png) 
-![CTS Result 2](screenshotss/143.png)
+![Crosstalk Control](screenshots/147.png)
 
 ---
 
-## 12. Setup and Hold Analysis with Real Clock
-
-After CTS:
+## Final Result Summary
 
 ```tcl
-run_sta
+report_checks -path_delay min_max
 ```
 
-![STA Real Clock 1](screenshots/144.png) 
-![STA Real Clock 2](screenshots/145.png)
+Expected result:
 
----
+- **Setup Slack**: MET
+- **Hold Slack**: MET
 
-## 13. Slack Optimization using Inverter
+![Final STA](screenshots/148.png)
 
-Analyze where to insert the inverter to adjust delays and improve slack.
-
-![Slack Fix Inverter](screenshots/146.png)
-
----
-
-## 14. Crosstalk and Shielding
-
-High fanout and long clock nets may suffer from crosstalk.
-
-Solution: Shield them with power or ground.
-
-![Crosstalk Fix](screenshots/147.png)
-
----
-
-# Timing analysis with ideal clocks using OpenSTA
-
-![Timing Report 1](screenshots/137.png) 
-![Timing Report 2](screenshots/138.png) 
-![Timing Report 3](screenshots/139.png) 
-![Timing Report 4](screenshots/140.png) 
-![Timing Report 5](screenshots/141.png)
-
----
 
 ### Lab Steps to configure OpenSTA for post-synth timing analysis
 
