@@ -540,3 +540,147 @@ run_cts
 ![CTS Verify 3](screenshots/CTS_Verify_3.png)
 
 
+# Timing Analysis with Real Clocks
+
+---
+
+## Setup Time Analysis
+
+![Setup Analysis 1](screenshots/160.png) 
+![Setup Analysis 2](screenshots/162.png) 
+![Setup Analysis 3](screenshots/161.png)
+
+---
+
+## Hold Time Analysis
+
+![Hold Analysis 1](screenshots/164.png) 
+![Hold Analysis 2](screenshots/163.png) 
+![Hold Analysis 3](screenshots/165.png) 
+![Hold Analysis 4](screenshots/166.png) 
+![Hold Analysis 5](screenshots/167.png)
+
+---
+
+## LAB: Analyze Timing with Real Clocks using OpenSTA
+
+We now run `run_cts` and verify CTS outputs.
+
+```bash
+run_cts
+```
+
+### CTS Output Files
+
+![CTS run output 1](screenshots/CTS_run_output.png) 
+
+![CTS run output 1](screenshots/CTS_run_output1.png)
+
+---
+
+## Post-CTS Timing Analysis with OpenROAD + OpenSTA
+
+Launch OpenROAD and load DEF/LEF for post-CTS timing analysis:
+
+```tcl
+openroad
+
+read_lef /openLANE_flow/designs/picorv32a/runs/16-03_17-49/tmp/merged.lef
+read_def /openLANE_flow/designs/picorv32a/runs/16-03_17-49/results/cts/picorv32a.cts.def
+write_db pico_cts.db
+read_db pico_cts.db
+read_verilog /openLANE_flow/designs/picorv32a/runs/16-03_17-49/results/synthesis/picorv32a.synthesis_cts.v
+read_liberty $::env(LIB_TYPICAL)
+link_design picorv32a
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+set_propagated_clock [all_clocks]
+
+report_checks -path_delay min_max -format full_clock_expanded -digits 4
+```
+
+### Report Output:
+
+![Report check 1](screenshots/Report_check_1.png) 
+![Report check 2](screenshots/Report_check_2.png) 
+![Report check 3](screenshots/Report_check_3.png)
+
+---
+
+## LAB: Observe Impact of Bigger CTS Buffers
+
+Temporarily remove smallest buffer:
+
+```tcl
+echo $::env(CTS_CLK_BUFFER_LIST)
+set ::env(CTS_CLK_BUFFER_LIST) [lreplace $::env(CTS_CLK_BUFFER_LIST) 0 0]
+```
+
+Reset DEF:
+
+```tcl
+set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/16-03_17-49/results/placement/picorv32a.placement.def
+run_cts
+echo $::env(CTS_CLK_BUFFER_LIST)
+```
+
+Re-run analysis:
+
+```tcl
+openroad
+
+read_lef /openLANE_flow/designs/picorv32a/runs/16-03_17-49/tmp/merged.lef
+read_def /openLANE_flow/designs/picorv32a/runs/16-03_17-49/results/cts/picorv32a.cts.def
+write_db pico_cts1.db
+read_db pico_cts1.db
+read_verilog /openLANE_flow/designs/picorv32a/runs/16-03_17-49/results/synthesis/picorv32a.synthesis_cts.v
+read_liberty $::env(LIB_TYPICAL)
+link_design picorv32a
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+set_propagated_clock [all_clocks]
+
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+
+report_clock_skew -hold
+report_clock_skew -setup
+```
+
+### Output:
+
+![Impact buffer 1](screenshots/Impact_buffer_1.png) 
+![Impact buffer 2](screenshots/Impact_buffer_2.png) 
+![Impact buffer 3](screenshots/Impact_buffer_3.png) 
+![Impact buffer 4](screenshots/Impact_buffer_4.png)
+
+---
+
+## LAB: Insert Specific Buffer (e.g., clkbuf_1)
+
+Insert a specific CTS buffer to manually control buffer impact:
+
+```tcl
+echo $::env(CTS_CLK_BUFFER_LIST)
+set ::env(CTS_CLK_BUFFER_LIST) [linsert $::env(CTS_CLK_BUFFER_LIST) 0 sky130_fd_sc_hd__clkbuf_1]
+```
+
+![Buffer insert](screenshots/Buffer_insert.png)
+
+---
+
+## Buffer Timing Comparison
+
+```
+For clkbuf_1
+    Hold slack  =   0.1127  (MET)
+    Setup slack =  13.8266  (MET)
+
+For clkbuf_2
+    Hold slack  =   0.2892  (MET)
+    Setup slack =  13.8266  (MET)
+```
+
+- **Conclusion**: Using larger CTS buffers (like `clkbuf_2`) improves hold slack.
+
+---
+
+
+
