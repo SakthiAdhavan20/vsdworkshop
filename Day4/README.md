@@ -26,15 +26,18 @@ There are some conditions that need to be satisfied before we place standard cel
 
 In the below location, we can find the `tracks.info` for `sky130_fd_sc_hd`.
 
-- Track Info 1  
+- Track Info 1 
+
   ![Track Info](screenshots/Track_Info_1.png)
 
-- Track Info 2  
+- Track Info 2 
+
   ![Track Info Zoom](screenshots/Track_Info_2.png)
 
 Initially the grid size looks like this:
 
-- **Original Grid**  
+- **Original Grid**
+ 
   ![Original Grid](screenshots/Initial_Grid_View.png)
 
 Now resize the grid as per the dimensions in `tracks.info`:
@@ -43,7 +46,8 @@ Now resize the grid as per the dimensions in `tracks.info`:
 grid 0.46um 0.34um 0.23um 0.17um
 ```
 
-- **Resized Grid 1**  
+- **Resized Grid 1** 
+
 ![Resized Grid 1](screenshots/After_Resize.png)
 
 
@@ -68,7 +72,8 @@ Generate `.lef` file:
 lef write
 ```
 
-- **LEF Write**  
+- **LEF Write** 
+
 ![LEF Write Output](screenshots/LEF_Generation.png)
   
 ![LEF Write Output](screenshots/LEF_Generation1.png)
@@ -86,7 +91,8 @@ cp libs/sky130_fd_sc_hd__* ~/Desktop/work/tools/openlane_working_dir/openlane/de
 cp sky130_vsdinv.lef ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
 ```
 
-- **Copied Files Result**  
+- **Copied Files Result** 
+ 
 ![Copied LEF and LIB](screenshots/Copied_LEF_and_LIB.png)
   
 ![Copied LEF and LIB](screenshots/Copied_LEF_and_LIB_1.png)
@@ -104,7 +110,8 @@ set ::env(LIB_TYPICAL) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc
 set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]
 ```
 
-- **Updated Config**  
+- **Updated Config**
+
   ![Config.tcl Update](screenshots/Config_Edit.png)
 
 - **sky130_fd_sc_hd__typical.lib**
