@@ -14,6 +14,8 @@ So we have to extract the `.lef` file from the `.mag` file.
 
 This is the inverter we have seen from the previous labs.
 
+![Track Info](screenshots/inv.png)
+
 ### Inverter Layout
 
 There are some conditions that need to be satisfied before we place standard cells into the PnR flow:
@@ -25,15 +27,15 @@ There are some conditions that need to be satisfied before we place standard cel
 In the below location, we can find the `tracks.info` for `sky130_fd_sc_hd`.
 
 - Track Info 1  
-  ![Track Info](../images/153.png)
+  ![Track Info](screenshots/Track_Info_1.png)
 
 - Track Info 2  
-  ![Track Info Zoom](../images/154.png)
+  ![Track Info Zoom](screenshots/Track_Info_2.png)
 
 Initially the grid size looks like this:
 
 - **Original Grid**  
-  ![Original Grid](../images/155.png)
+  ![Original Grid](screenshots/155.png)
 
 Now resize the grid as per the dimensions in `tracks.info`:
 
@@ -42,16 +44,16 @@ grid 0.46um 0.34um 0.23um 0.17um
 ```
 
 - **Resized Grid 1**  
-  ![Resized Grid 1](../images/156.png)
+  ![Resized Grid 1](screenshots/156.png)
 
 - **Resized Grid 2**  
-  ![Resized Grid 2](../images/157.png)
+  ![Resized Grid 2](screenshots/157.png)
 
 Here, the input and output ports (A and Y) are lying on the intersection of the vertical and horizontal pitch ✅
 
 - Horizontal track pitch = 0.46um → width = 3 × 0.46 = 1.38um ✅  
 - **Horizontal Track**  
-  ![Horizontal Track](../images/158.png)
+  ![Horizontal Track](screenshots/158.png)
 
 - Vertical track pitch = 0.34um → height = 8 × 0.34 = 2.72um ✅
 
@@ -63,7 +65,7 @@ magic -T sky130A.tech sky130_vsdinv.mag &
 ```
 
 - **New Layout File**  
-  ![Saved Magic](../images/159.png)
+  ![Saved Magic](screenshots/159.png)
 
 Generate `.lef` file:
 
@@ -72,7 +74,7 @@ lef write
 ```
 
 - **LEF Write**  
-  ![LEF Write Output](../images/160.png)
+  ![LEF Write Output](screenshots/160.png)
 
 ---
 
@@ -84,7 +86,7 @@ cp sky130_vsdinv.lef ~/Desktop/work/tools/openlane_working_dir/openlane/designs/
 ```
 
 - **Copied Files Result**  
-  ![Copied LEF and LIB](../images/161.png)
+  ![Copied LEF and LIB](screenshots/161.png)
 
 ---
 
@@ -100,7 +102,7 @@ set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/sr
 ```
 
 - **Updated Config**  
-  ![Config.tcl Update](../images/162.png)
+  ![Config.tcl Update](screenshots/162.png)
 
 ---
 
@@ -116,10 +118,10 @@ run_synthesis
 ```
 
 - **Run Synthesis 1**  
-  ![Synthesis 1](../images/163.png)
+  ![Synthesis 1](screenshots/163.png)
 
 - **Run Synthesis 2**  
-  ![Synthesis 2](../images/164.png)
+  ![Synthesis 2](screenshots/164.png)
 
 ---
 
@@ -131,16 +133,16 @@ To avoid large skew between clock endpoints:
 - Buffers must be identical across levels
 
 - **Delay Table 1**  
-  ![Delay 1](../images/165.png)
+  ![Delay 1](screenshots/165.png)
 
 - **Delay Table 2**  
-  ![Delay 2](../images/166.png)
+  ![Delay 2](screenshots/166.png)
 
 - **Delay Table 3**  
-  ![Delay 3](../images/167.png)
+  ![Delay 3](screenshots/167.png)
 
 - **Delay Table 4**  
-  ![Delay 4](../images/168.png)
+  ![Delay 4](screenshots/168.png)
 
 **Skew = 0** because delay on both paths = x9' + y15
 
@@ -151,7 +153,7 @@ To avoid large skew between clock endpoints:
 View slack-related synthesis parameters in `README.md`
 
 - **Synthesis Params**  
-  ![Synthesis Param](../images/169.png)
+  ![Synthesis Param](screenshots/169.png)
 
 Update synthesis settings:
 
@@ -173,10 +175,10 @@ run_synthesis
 ```
 
 - **Updated Synth Output 1**  
-  ![Synthesis Output 1](../images/170.png)
+  ![Synthesis Output 1](screenshots/170.png)
 
 - **Updated Synth Output 2**  
-  ![Synthesis Output 2](../images/171.png)
+  ![Synthesis Output 2](screenshots/171.png)
 
 **Before:**
 
@@ -197,10 +199,10 @@ wns: 0
 To verify inverter inclusion, search `merged.lef` for `vsdinv`
 
 - **LEF verification 1**  
-  ![LEF Search](../images/172.png)
+  ![LEF Search](screenshots/172.png)
 
 - **LEF verification 2**  
-  ![LEF Search 2](../images/173.png)
+  ![LEF Search 2](screenshots/173.png)
 
 ---
 
@@ -213,10 +215,10 @@ run_floorplan
 If error appears, refer to OpenLANE commands documentation
 
 - **OpenLANE Error**  
-  ![Error Msg](../images/174.png)
+  ![Error Msg](screenshots/174.png)
 
 - **Commands Ref**  
-  ![Command Help](../images/175.png)
+  ![Command Help](screenshots/175.png)
 
 Then run:
 
@@ -230,16 +232,16 @@ detailed_placement
 ```
 
 - **Floorplan**  
-  ![Floorplan](../images/176.png)
+  ![Floorplan](screenshots/176.png)
 
 - **Placement 1**  
-  ![Global Placement](../images/177.png)
+  ![Global Placement](screenshots/177.png)
 
 - **Placement 2**  
-  ![Detailed Placement](../images/178.png)
+  ![Detailed Placement](screenshots/178.png)
 
 - **Placement 3**  
-  ![Decap and Re-Placement](../images/179.png)
+  ![Decap and Re-Placement](screenshots/179.png)
 
 ---
 
@@ -252,19 +254,19 @@ def read picorv32a.placement.def &
 ```
 
 - **Magic DEF 1**  
-  ![Magic View 1](../images/180.png)
+  ![Magic View 1](screenshots/180.png)
 
 - **Magic DEF 2**  
-  ![Magic View 2](../images/181.png)
+  ![Magic View 2](screenshots/181.png)
 
 - **Magic DEF 3**  
-  ![Magic View 3](../images/182.png)
+  ![Magic View 3](screenshots/182.png)
 
 - **Magic DEF 4**  
-  ![Magic View 4](../images/183.png)
+  ![Magic View 4](screenshots/183.png)
 
 - **Magic DEF 5**  
-  ![Magic View 5](../images/184.png)
+  ![Magic View 5](screenshotss/184.png)
 
 
 ## 5. Netlist and Cell Verification
