@@ -35,7 +35,7 @@ In the below location, we can find the `tracks.info` for `sky130_fd_sc_hd`.
 Initially the grid size looks like this:
 
 - **Original Grid**  
-  ![Original Grid](screenshots/155.png)
+  ![Original Grid](screenshots/Initial_Grid_View.png)
 
 Now resize the grid as per the dimensions in `tracks.info`:
 
@@ -44,18 +44,17 @@ grid 0.46um 0.34um 0.23um 0.17um
 ```
 
 - **Resized Grid 1**  
-  ![Resized Grid 1](screenshots/156.png)
+  ![Resized Grid 1](screenshots/After_Resize.png)
 
-- **Resized Grid 2**  
-  ![Resized Grid 2](screenshots/157.png)
 
 Here, the input and output ports (A and Y) are lying on the intersection of the vertical and horizontal pitch ✅
 
-- Horizontal track pitch = 0.46um → width = 3 × 0.46 = 1.38um ✅  
-- **Horizontal Track**  
-  ![Horizontal Track](screenshots/158.png)
-
+- Horizontal track pitch = 0.46um → width = 3 × 0.46 = 1.38um ✅ 
+  
+ 
 - Vertical track pitch = 0.34um → height = 8 × 0.34 = 2.72um ✅
+
+ ![Horizontal Track](screenshots/Final_Grid.png)
 
 ### Save Layout
 
