@@ -8,18 +8,20 @@ Before integrating a custom standard cell into the PnR flow, we need to ensure i
 
 **Conditions to Meet:**
 
-- Ports must lie on intersections of horizontal and vertical tracks.  
-- Width should be an odd multiple of horizontal pitch.  
+- Ports must lie on intersections of horizontal and vertical tracks. 
+- Width should be an odd multiple of horizontal pitch. 
 - Height should be an even multiple of vertical pitch.
+
+![Track Info 1](screenshots/inv.png) 
 
 ### Grid and Track Info:
 
-![Track Info 1](../images/103.png)  
-![Track Info 2](../images/104.png)
+![Track Info 1](screenshots/Track_Info_1.png) 
+![Track Info 2](screenshots/Track_Info_2.png)
 
 ### Initial grid view in Magic:
 
-![Initial Grid View](../images/105.png)
+![Initial Grid View](screenshots/Initial_Grid_View.png)
 
 ### Resize Grid in Magic:
 
@@ -27,8 +29,8 @@ Before integrating a custom standard cell into the PnR flow, we need to ensure i
 grid 0.46um 0.34um 0.23um 0.17um
 ```
 
-![After Resize](../images/106.png)  
-![Final Grid](../images/107.png)
+![After Resize](screenshots/106.png) 
+![Final Grid](screenshots/107.png)
 
 ---
 
@@ -42,8 +44,13 @@ lef write sky130_inv.lef
 
 This generates a standard cell LEF file that will be used in the OpenLANE flow.
 
-![LEF Generation](../images/108.png)
+![LEF Generation](screenshots/LEF_Generation1.png)
 
+![LEF Generation](screenshots/LEF_Generation.png)
+
+![LEF Generation](screenshots/LEF_Generation2.png)
+
+![LEF Generation](screenshots/LEF_Generation3.png)
 ---
 
 ## 3. Add Custom Cell to OpenLANE Setup
@@ -55,7 +62,7 @@ set ::env(EXTRA_LEFS) "$::env(DESIGN_DIR)/src/sky130_inv.lef"
 set ::env(EXTRA_GDS_FILES) "$::env(DESIGN_DIR)/src/sky130_inv.gds"
 ```
 
-![Config Edit](../images/109.png)
+![Config Edit](screenshots/Config_Edit.png)
 
 Make sure the custom cell Verilog and Liberty timing model (`sky130_inv.v` and `sky130_inv.lib`) are also copied into the design `src/` folder.
 
@@ -77,8 +84,8 @@ add_lefs -src $lefs
 run_synthesis
 ```
 
-![Synthesis 1](../images/115.png)  
-![Synthesis 2](../images/116.png)
+![Synthesis 1](screenshots/115.png) 
+![Synthesis 2](screenshots/116.png)
 
 ---
 
@@ -93,7 +100,7 @@ gedit picorv32a.synthesis.v
 
 Search for `sky130_inv`.
 
-![Netlist Search](../images/117.png)
+![Netlist Search](screenshots/117.png)
 
 ---
 
@@ -105,7 +112,7 @@ Make sure `sky130_inv.lib` is added in config.tcl:
 set ::env(LIB_SYNTH) "$::env(DESIGN_DIR)/src/sky130_inv.lib"
 ```
 
-![Liberty Include](../images/118.png)
+![Liberty Include](screenshots/118.png)
 
 ---
 
@@ -113,7 +120,7 @@ set ::env(LIB_SYNTH) "$::env(DESIGN_DIR)/src/sky130_inv.lib"
 
 You can now simulate scenarios where slack violations occur, and analyze how `sky130_inv` can be inserted to improve delay.
 
-![Slack Info](../images/119.png)
+![Slack Info](screenshots/119.png)
 
 ---
 
@@ -128,9 +135,9 @@ run_sta
 
 Observe slack and critical paths.
 
-![Timing STA 1](../images/137.png)  
-![Timing STA 2](../images/138.png)  
-![Timing STA 3](../images/139.png)
+![Timing STA 1](screenshots/137.png) 
+![Timing STA 2](screenshotss/138.png) 
+![Timing STA 3](screenshots/139.png)
 
 ---
 
@@ -145,7 +152,7 @@ Delay tables capture delay across combinations of input transition and output lo
 
 These are extracted using SPICE-level simulation and used in `.lib` characterization.
 
-![Delay Table](../images/140.png)
+![Delay Table](screenshots/140.png)
 
 ---
 
@@ -160,7 +167,7 @@ link_design sky130_inv
 
 Analyze the new path and compare slack.
 
-![STA with Custom INV](../images/141.png)
+![STA with Custom INV](screenshots/141.png)
 
 ---
 
@@ -172,8 +179,8 @@ run_cts
 
 This performs H-Tree based clock distribution and inserts clock buffers.
 
-![CTS Result 1](../images/142.png)  
-![CTS Result 2](../images/143.png)
+![CTS Result 1](screenshots/142.png) 
+![CTS Result 2](screenshotss/143.png)
 
 ---
 
@@ -185,8 +192,8 @@ After CTS:
 run_sta
 ```
 
-![STA Real Clock 1](../images/144.png)  
-![STA Real Clock 2](../images/145.png)
+![STA Real Clock 1](screenshots/144.png) 
+![STA Real Clock 2](screenshots/145.png)
 
 ---
 
@@ -194,7 +201,7 @@ run_sta
 
 Analyze where to insert the inverter to adjust delays and improve slack.
 
-![Slack Fix Inverter](../images/146.png)
+![Slack Fix Inverter](screenshots/146.png)
 
 ---
 
@@ -204,17 +211,17 @@ High fanout and long clock nets may suffer from crosstalk.
 
 Solution: Shield them with power or ground.
 
-![Crosstalk Fix](../images/147.png)
+![Crosstalk Fix](screenshots/147.png)
 
 ---
 
 # Timing analysis with ideal clocks using OpenSTA
 
-![Timing Report 1](../images/137.png)  
-![Timing Report 2](../images/138.png)  
-![Timing Report 3](../images/139.png)  
-![Timing Report 4](../images/140.png)  
-![Timing Report 5](../images/141.png)
+![Timing Report 1](screenshots/137.png) 
+![Timing Report 2](screenshots/138.png) 
+![Timing Report 3](screenshots/139.png) 
+![Timing Report 4](screenshots/140.png) 
+![Timing Report 5](screenshots/141.png)
 
 ---
 
@@ -230,7 +237,7 @@ set ::env(SYNTH_SIZING) 1
 run_synthesis
 ```
 
-> Before moving to post-synth analysis, complete the above steps.  
+> Before moving to post-synth analysis, complete the above steps. 
 > To perform post-synthesis timing analysis, first we need to add config files into our flow.
 
 Create a config file at:
@@ -241,7 +248,7 @@ Create a config file at:
 
 Add the following content:
 
-![pre_sta.conf](../images/142.png)
+![pre_sta.conf](screenshots/142.png)
 
 ```tcl
 set_cmd_units -time ns -capacitance pF -current mA -voltage V -resistance kOhm -distance um
@@ -263,7 +270,7 @@ Create the SDC file at:
 
 Add the following content:
 
-![my_base.sdc](../images/143.png)
+![my_base.sdc](screenshots/143.png)
 
 ```tcl
 set ::env(CLOCK_PORT) clk
@@ -304,9 +311,9 @@ sta pre_sta.conf
 
 This performs post-synthesis timing analysis.
 
-![STA Output 1](../images/144.png)  
-![STA Output 2](../images/145.png)  
-![STA Output 3](../images/146.png)
+![STA Output 1](screenshots/144.png) 
+![STA Output 2](screenshots/145.png) 
+![STA Output 3](screenshots/146.png)
 
 ---
 
@@ -325,11 +332,11 @@ run_synthesis
 
 ---
 
-![Fanout Update 1](../images/147.png)  
-![Fanout Update 2](../images/148.png)  
-![Fanout Update 3](../images/149.png)  
-![Fanout Update 4](../images/150.png)  
-![Fanout Update 5](../images/151.png)
+![Fanout Update 1](screenshots/147.png) 
+![Fanout Update 2](screenshots/148.png)
+![Fanout Update 3](screenshots/149.png) 
+![Fanout Update 4](screenshots/150.png) 
+![Fanout Update 5](screenshots/151.png)
 
 # Clock Tree Synthesis (CTS) using TritonCTS and Signal Integrity
 
