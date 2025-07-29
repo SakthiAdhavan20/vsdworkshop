@@ -291,7 +291,7 @@ magic -d XR
 
 ![met3_zoom](screenshots/met3_zoom.png)
 
-)
+
   
 ![poly_open](screenshots/poly_open.png)
 
