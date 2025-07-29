@@ -262,6 +262,14 @@ Fall Transition = 4.05532 - 4.053 = 0.00232ns
 Fall Delay = 4.055 - 4.038 = 0.017ns
 ```
 
+
+| Metric            | Value        |
+|-------------------|--------------|
+| Rise Transition   | 0.2 ns       |
+| Rise Delay        | 0.03644 ns   |
+| Fall Transition   | 0.00232 ns   |
+| Fall Delay        | 0.017 ns     |
+
 ---
 
 ## 8. Sky130 Tech DRC Rules and Debugging
@@ -320,7 +328,10 @@ drc check
 
 ![drc_pass](screenshots/drc_pass1.png)
 
-
 ---
+##  Conclusion
+In Day 3, we successfully designed and characterized a CMOS inverter using Magic and ngspice. We simulated switching behavior, calculated delays and transitions, and ensured layout correctness through DRC verification using Sky130 PDK.
+
+The extracted SPICE and LEF files will be used in later stages for integration into OpenLANE.
 
 
