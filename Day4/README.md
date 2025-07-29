@@ -76,7 +76,7 @@ Make sure the custom cell Verilog and Liberty timing model (`sky130_inv.v` and `
 
 ```tcl
 package require openlane 0.9
-prep -design picorv32a -tag 16-03_17-49 -overwrite
+prep -design picorv32a -tag 26-07_06-22 -overwrite
 
 set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
 add_lefs -src $lefs
@@ -84,8 +84,8 @@ add_lefs -src $lefs
 run_synthesis
 ```
 
-![Synthesis 1](screenshots/115.png) 
-![Synthesis 2](screenshots/116.png)
+![Synthesis 1](screenshots/Synthesis_1.png) 
+![Synthesis 2](screenshots/Synthesis_2.png)
 
 ---
 
