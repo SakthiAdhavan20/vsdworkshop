@@ -488,7 +488,7 @@ Fanout-modified results:
 From the previous labs, run until the placement stage using the following commands:
 
 ```bash
-prep -design picorv32a -tag 16-03_17-49 -overwrite
+prep -design picorv32a -tag 26-07_06-22 -overwrite
 set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
 add_lefs -src $lefs
 
@@ -585,11 +585,11 @@ Launch OpenROAD and load DEF/LEF for post-CTS timing analysis:
 ```tcl
 openroad
 
-read_lef /openLANE_flow/designs/picorv32a/runs/16-03_17-49/tmp/merged.lef
-read_def /openLANE_flow/designs/picorv32a/runs/16-03_17-49/results/cts/picorv32a.cts.def
+read_lef /openLANE_flow/designs/picorv32a/runs/26-07_06-22/tmp/merged.lef
+read_def /openLANE_flow/designs/picorv32a/runs/26-07_06-22/results/cts/picorv32a.cts.def
 write_db pico_cts.db
 read_db pico_cts.db
-read_verilog /openLANE_flow/designs/picorv32a/runs/16-03_17-49/results/synthesis/picorv32a.synthesis_cts.v
+read_verilog /openLANE_flow/designs/picorv32a/runs/26-07_06-22/results/synthesis/picorv32a.synthesis_cts.v
 read_liberty $::env(LIB_TYPICAL)
 link_design picorv32a
 read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
@@ -618,7 +618,7 @@ set ::env(CTS_CLK_BUFFER_LIST) [lreplace $::env(CTS_CLK_BUFFER_LIST) 0 0]
 Reset DEF:
 
 ```tcl
-set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/16-03_17-49/results/placement/picorv32a.placement.def
+set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/26-07_06-22/results/placement/picorv32a.placement.def
 run_cts
 echo $::env(CTS_CLK_BUFFER_LIST)
 ```
@@ -628,11 +628,11 @@ Re-run analysis:
 ```tcl
 openroad
 
-read_lef /openLANE_flow/designs/picorv32a/runs/16-03_17-49/tmp/merged.lef
-read_def /openLANE_flow/designs/picorv32a/runs/16-03_17-49/results/cts/picorv32a.cts.def
+read_lef /openLANE_flow/designs/picorv32a/runs/26-07_06-22/tmp/merged.lef
+read_def /openLANE_flow/designs/picorv32a/runs/26-07_06-22/results/cts/picorv32a.cts.def
 write_db pico_cts1.db
 read_db pico_cts1.db
-read_verilog /openLANE_flow/designs/picorv32a/runs/16-03_17-49/results/synthesis/picorv32a.synthesis_cts.v
+read_verilog /openLANE_flow/designs/picorv32a/runs/26-07_06-22/results/synthesis/picorv32a.synthesis_cts.v
 read_liberty $::env(LIB_TYPICAL)
 link_design picorv32a
 read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
