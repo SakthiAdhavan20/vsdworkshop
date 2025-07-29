@@ -274,34 +274,34 @@ tar xfz drc_tests.tgz
 magic -d XR
 ```
 
-📷 Screenshot:  
-![drc_download](screenshots/92.png)
 
-📷 Screenshot:  
-![magic_xr](screenshots/93.png)
+![drc_download](screenshots/drc_download.png)
+
+
+![magic_xr](screenshots/magic_xr.png)
 
 ### 8.2 Inspect and Fix DRC
 
-📷 Screenshot:  
-![met3_open](screenshots/94.png)
+ 
+![met3_open](screenshots/met3_open.png)
 
-📷 Screenshot:  
-![met3_inspect](screenshots/95.png)
+ 
+![met3_inspect](screenshots/met3_inspect.png)
 
-📷 Screenshot:  
-![met3_zoom](screenshots/96.png)
 
-📷 Screenshot:  
-![poly_open](screenshots/97.png)
+![met3_zoom](screenshots/met3_zoom.png)
 
-📷 Screenshot:  
-![poly_fix1](screenshots/98.png)
+![met3_zoom](screenshots/met3_zoom1.png)
+  
+![poly_open](screenshots/poly_open.png)
 
-📷 Screenshot:  
-![poly_fix2](screenshots/99.png)
 
-📷 Screenshot:  
-![poly_fix3](screenshots/100.png)
+![poly_fix1](screenshots/poly_fix1.png)
+
+ 
+![poly_fix2](screenshots/poly_fix2.png)
+
+
 
 ### 8.3 Reload Tech File and Recheck DRC
 
@@ -310,11 +310,17 @@ tech load sky130A.tech
 drc check
 ```
 
-📷 Screenshot:  
-![load_tech](screenshots/101.png)
+ 
+![load_tech](screenshots/load_tech.png)
 
-📷 Screenshot:  
-![drc_pass](screenshots/102.png)
+![load_tech](screenshots/load_tech1.png)
+
+  
+![drc_pass](screenshots/drc_pass.png)
+
+![drc_pass](screenshots/drc_pass1.png)
+
+![drc_pass](screenshots/drc_pass2.png)
 
 ---
 
