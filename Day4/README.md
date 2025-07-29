@@ -517,20 +517,26 @@ run_cts
 
 ### CTS Output
 
-![CTS Output 1](screenshots/173.png)
+![CTS Output 1](screenshots/CTS_Output_1.png)
 
-![CTS Output 2](screenshots/174.png)
+![CTS Output 2](screenshots/CTS_Output_2.png)
 
-![CTS Output 3](screenshots/175.png)
+![CTS Output 3](screenshots/CTS_Output_3.png)
+
+![CTS Output 4](screenshots/CTS_Output_4.png)
+
+![CTS Output 5](screenshots/CTS_Output_5.png)
+
+![CTS Output 6](screenshots/CTS_Output_6.png)
 
 ---
 
 ### Verifying CTS Run
 
-![CTS Verify 1](screenshots/176.png)
+![CTS Verify 1](screenshots/CTS_Verify_1.png)
 
-![CTS Verify 2](screenshots/177.png)
+![CTS Verify 2](screenshots/CTS_Verify_2.png)
 
-![CTS Verify 3](screenshots/178.png)
+![CTS Verify 3](screenshots/CTS_Verify_3.png)
 
 
