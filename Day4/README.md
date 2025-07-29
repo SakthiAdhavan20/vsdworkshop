@@ -546,19 +546,19 @@ run_cts
 
 ## Setup Time Analysis
 
-![Setup Analysis 1](screenshots/160.png) 
-![Setup Analysis 2](screenshots/162.png) 
-![Setup Analysis 3](screenshots/161.png)
+![Setup Analysis 1](screenshots/Setup_Analysis_1.png) 
+![Setup Analysis 2](screenshots/Setup_Analysis_2.png) 
+![Setup Analysis 3](screenshots/Setup_Analysis_3.png)
 
 ---
 
 ## Hold Time Analysis
 
-![Hold Analysis 1](screenshots/164.png) 
-![Hold Analysis 2](screenshots/163.png) 
-![Hold Analysis 3](screenshots/165.png) 
-![Hold Analysis 4](screenshots/166.png) 
-![Hold Analysis 5](screenshots/167.png)
+![Hold Analysis 1](screenshots/Hold_Analysis_1.png) 
+![Hold Analysis 2](screenshots/Hold_Analysis_2.png) 
+![Hold Analysis 3](screenshots/Hold_Analysis_3.png) 
+![Hold Analysis 4](screenshots/Hold_Analysis_4.png) 
+![Hold Analysis 5](screenshots/Hold_Analysis_5.png)
 
 ---
 
