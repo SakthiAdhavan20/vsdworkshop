@@ -349,6 +349,9 @@ add_lefs -src $lefs
 set ::env(SYNTH_SIZING) 1
 run_synthesis
 ```
+
+![Synthesis](screenshots/Synthesis.png)
+
 ---
 
 ## Step 2: Create the STA Configuration File
