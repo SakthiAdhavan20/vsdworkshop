@@ -139,10 +139,12 @@ add_lefs -src $lefs
 run_synthesis
 ```
 
-- **Run Synthesis 1**  
+- **Run Synthesis 1** 
+
   ![Synthesis 1](screenshots/Synthesis_1.png)
 
-- **Run Synthesis 2**  
+- **Run Synthesis 2** 
+
   ![Synthesis 2](screenshots/Synthesis_2.png)
 
 ---
@@ -154,17 +156,21 @@ To avoid large skew between clock endpoints:
 - Buffers on the same level must have same load → same delay
 - Buffers must be identical across levels
 
-- **Delay Table 1**  
-  ![Delay 1](screenshots/165.png)
+- **Delay Table 1** 
 
-- **Delay Table 2**  
-  ![Delay 2](screenshots/166.png)
+  ![Delay 1](screenshots/Delay_1.png)
 
-- **Delay Table 3**  
-  ![Delay 3](screenshots/167.png)
+- **Delay Table 2** 
 
-- **Delay Table 4**  
-  ![Delay 4](screenshots/168.png)
+  ![Delay 2](screenshots/Delay_2.png)
+
+- **Delay Table 3** 
+
+  ![Delay 3](screenshots/Delay_3.png)
+
+- **Delay Table 4** 
+
+  ![Delay 4](screenshots/Delay_4.png)
 
 **Skew = 0** because delay on both paths = x9' + y15
 
@@ -175,12 +181,12 @@ To avoid large skew between clock endpoints:
 View slack-related synthesis parameters in `README.md`
 
 - **Synthesis Params**  
-  ![Synthesis Param](screenshots/169.png)
+  ![Synthesis Param](screenshots/Synthesis_Param.png)
 
 Update synthesis settings:
 
 ```tcl
-prep -design picorv32a -tag 16-03_17-49 -overwrite
+prep -design picorv32a -tag 26-07_06-22 -overwrite
 set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
 add_lefs -src $lefs
 
