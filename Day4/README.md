@@ -682,5 +682,30 @@ For clkbuf_2
 
 ---
 
+##  Summary
+
+|  Topic                              | ✅ Description                                                                 |
+|--------------------------------------|--------------------------------------------------------------------------------|
+| Grid to Track Alignment              | Aligned Magic layout to routing tracks by ensuring port placement and dimensions. |
+| Standard Cell LEF Generation         | Converted `.mag` layout of `vsdinv` to `.lef` using `magic` and `lef` command.   |
+| Delay Table Modeling                 | Learned delay behavior vs. input slope & load; validated delay symmetry.        |
+| Synthesis Configuration              | Used `SYNTH_SIZING`, `SYNTH_STRATEGY`, and `SYNTH_MAX_FANOUT` to improve slack. |
+| STA with Ideal Clocks                | Performed timing analysis post-synthesis with `OpenSTA` using ideal clocks.     |
+| CTS with TritonCTS                   | Routed clock tree with H-tree buffering and measured skew improvement.          |
+| Real Clock Timing Analysis           | Configured clock propagation and buffers; analyzed setup/hold after CTS.        |
+
+
+
+## Observations
+
+| Test Condition                     | TNS (ns) | WNS (ns) | Hold Slack (ns) | Result                 | Notes                           |
+|--------------------------------------|----------|----------|------------------|-------------------------|---------------------------------|
+| Initial synthesis                    | -711.59  | -23.89   | —                | ❌ Slack Violation       | No sizing/strategy applied      |
+| After sizing & strategy              | 0        | 0        | —                | ✅ Slack Fixed           | Applied `SYNTH_STRATEGY=2`      |
+| Fanout optimization (`fanout=4`)     | 0        | 0        | —                | ✅ Stable Slack          | Reduced output load per gate    |
+| Post-CTS with `clkbuf_1`             | —        | —        | 0.1127           | ✅ Acceptable Hold       | Balanced tree, default buffer   |
+| Post-CTS with stronger `clkbuf_2`    | —        | —        | 0.2892           | ✅ Improved Hold         | Better delay with larger buffer |
+
+
 
 
