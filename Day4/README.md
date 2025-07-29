@@ -316,13 +316,13 @@ def read picorv32a.placement.def &
   ![Magic View 4](screenshots/Magic_View_4.png)
 
 
-  ![Magic View 5](screenshotss/Magic_View_5.png)
+  ![Magic View 5](screenshots/Magic_View_5.png)
 
 
-  ![Magic View 6](screenshotss/Magic_View_6.png)
+  ![Magic View 6](screenshots/Magic_View_6.png)
 
 
-  ![Magic View 7](screenshotss/Magic_View_7.png)
+  ![Magic View 7](screenshots/Magic_View_7.png)
 
 
 ## 5. Netlist and Cell Verification
