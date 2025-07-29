@@ -451,7 +451,86 @@ Fanout-modified results:
 ![Fanout Output 3](screenshots/Fanout_Output_3.png) 
 ![Fanout Output 4](screenshots/Fanout_Output_4.png) 
 
+---
+
+# Clock Tree Synthesis TritonCTS and Signal Integrity
+
+![Clock Tree Buffer Insertion 1](screenshots/Clock_Tree_Buffer_Insertion_1.png)
+
+![Clock Tree Buffer Insertion 2](screenshots/Clock_Tree_Buffer_Insertion_2.png)
+
+- So we go for `H-Tree` method:
+
+![H-Tree Clock Distribution](screenshots/H-Tree_Clock_Distribution.png)
+
+![Clock H-Tree Visualization](screenshots/Clock_H-Tree_Visualization.png)
+
+- After adding buffers 
+
+![After Buffer Insertion](screenshots/After_Buffer_Insertion.png)
 
 ---
+
+### Clock Net Shielding 👇
+
+![Clock Net Shielding Visual 1](screenshots/Clock_Net_Shielding_Visual1.png)
+
+![Clock Net Shielding Visual 2](screenshots/Clock_Net_Shielding_Visual2.png)
+
+- Therefore, the clock net is shielded:
+
+![Final Clock Shielding Result](screenshots/Final_Clock_Shielding_Result.png)
+
+---
+
+### Lab Steps to Run CTS Using TritonCTS
+
+From the previous labs, run until the placement stage using the following commands:
+
+```bash
+prep -design picorv32a -tag 16-03_17-49 -overwrite
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+set ::env(SYNTH_STRATEGY) "DELAY 0"
+set ::env(SYNTH_SIZING) 1
+
+run_synthesis
+
+init_floorplan
+place_io
+global_placement_or
+detailed_placement
+tap_decap_or
+detailed_placement
+```
+
+- After placement is done, move to the CTS stage and run:
+
+```bash
+run_cts
+```
+
+(This uses **TritonCTS** in **OpenROAD**)
+
+---
+
+### CTS Output
+
+![CTS Output 1](screenshots/173.png)
+
+![CTS Output 2](screenshots/174.png)
+
+![CTS Output 3](screenshots/175.png)
+
+---
+
+### Verifying CTS Run
+
+![CTS Verify 1](screenshots/176.png)
+
+![CTS Verify 2](screenshots/177.png)
+
+![CTS Verify 3](screenshots/178.png)
 
 
