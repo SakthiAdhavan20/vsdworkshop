@@ -62,10 +62,6 @@ Here, the input and output ports (A and Y) are lying on the intersection of the 
 save sky130_vsdinv.mag
 magic -T sky130A.tech sky130_vsdinv.mag &
 ```
-
-- **New Layout File**  
-  ![Saved Magic](screenshots/159.png)
-
 Generate `.lef` file:
 
 ```tcl
@@ -73,7 +69,13 @@ lef write
 ```
 
 - **LEF Write**  
-  ![LEF Write Output](screenshots/160.png)
+  ![LEF Write Output](screenshots/LEF_Generation.png)
+  
+![LEF Write Output](screenshots/LEF_Generation1.png)
+
+![LEF Write Output](screenshots/LEF_Generation2.png)
+
+![LEF Write Output](screenshots/LEF_Generation3.png)
 
 ---
 
@@ -85,7 +87,9 @@ cp sky130_vsdinv.lef ~/Desktop/work/tools/openlane_working_dir/openlane/designs/
 ```
 
 - **Copied Files Result**  
-  ![Copied LEF and LIB](screenshots/161.png)
+  ![Copied LEF and LIB](screenshots/Copied_LEF_and_LIB.png)
+  
+![Copied LEF and LIB](screenshots/Copied_LEF_and_LIB_1.png)
 
 ---
 
@@ -101,7 +105,7 @@ set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/sr
 ```
 
 - **Updated Config**  
-  ![Config.tcl Update](screenshots/162.png)
+  ![Config.tcl Update](screenshots/Config_Edit.png)
 
 ---
 
@@ -117,10 +121,10 @@ run_synthesis
 ```
 
 - **Run Synthesis 1**  
-  ![Synthesis 1](screenshots/163.png)
+  ![Synthesis 1](screenshots/Synthesis_1.png)
 
 - **Run Synthesis 2**  
-  ![Synthesis 2](screenshots/164.png)
+  ![Synthesis 2](screenshots/Synthesis_2.png)
 
 ---
 
