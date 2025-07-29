@@ -180,7 +180,8 @@ To avoid large skew between clock endpoints:
 
 View slack-related synthesis parameters in `README.md`
 
-- **Synthesis Params**  
+- **Synthesis Params** 
+
   ![Synthesis Param](screenshots/Synthesis_Param.png)
 
 Update synthesis settings:
@@ -202,11 +203,13 @@ echo $::env(SYNTH_DRIVING_CELL)
 run_synthesis
 ```
 
-- **Updated Synth Output 1**  
-  ![Synthesis Output 1](screenshots/170.png)
+- **Updated Synth Output 1** 
 
-- **Updated Synth Output 2**  
-  ![Synthesis Output 2](screenshots/171.png)
+  ![Synthesis Output 1](screenshots/Synthesis_Output_1.png)
+
+- **Updated Synth Output 2** 
+
+  ![Synthesis Output 2](screenshots/Synthesis_Output_2.png)
 
 **Before:**
 
@@ -223,14 +226,17 @@ Chip area: 196832.528000
 tns: 0
 wns: 0
 ```
+ ![Synthesis Output 2](screenshots/Synthesis_Output_3.png)
 
 To verify inverter inclusion, search `merged.lef` for `vsdinv`
 
-- **LEF verification 1**  
-  ![LEF Search](screenshots/172.png)
+- **LEF verification 1** 
 
-- **LEF verification 2**  
-  ![LEF Search 2](screenshots/173.png)
+  ![LEF Search](screenshots/LEF_Search1.png)
+
+- **LEF verification 2** 
+
+  ![LEF Search 2](screenshots/LEF_Search2.png)
 
 ---
 
@@ -242,11 +248,13 @@ run_floorplan
 
 If error appears, refer to OpenLANE commands documentation
 
-- **OpenLANE Error**  
-  ![Error Msg](screenshots/174.png)
+- **OpenLANE Error** 
 
-- **Commands Ref**  
-  ![Command Help](screenshots/175.png)
+  ![Error Msg](screenshots/Error_Msg.png)
+
+- **Commands Ref** 
+
+  ![Command Help](screenshots/Command_Help.png)
 
 Then run:
 
@@ -259,17 +267,29 @@ tap_decap_or
 detailed_placement
 ```
 
-- **Floorplan**  
-  ![Floorplan](screenshots/176.png)
+- **init_floorplan** 
 
-- **Placement 1**  
-  ![Global Placement](screenshots/177.png)
+  ![Floorplan](screenshots/Floorplan.png)
 
-- **Placement 2**  
-  ![Detailed Placement](screenshots/178.png)
+- **place_io** 
 
-- **Placement 3**  
-  ![Decap and Re-Placement](screenshots/179.png)
+  ![place_io](screenshots/place_io.png)
+
+- **global_placement_or** 
+
+  ![global_placement_or](screenshots/global_placement_or.png)
+
+- **detailed_placement** 
+
+  ![Decap and Re-Placement](screenshots/Decap_and_Re-Placement.png)
+
+- **tap_decap_or**
+  
+  ![tap_decap_or](screenshots/tap_decap_or.png)
+
+- **detailed_placement**
+
+  ![Decap and Re-Placement](screenshots/Decap_and_Re-Placemen1.png)
 
 ---
 
@@ -280,21 +300,27 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 lef read ../../tmp/merged.lef \
 def read picorv32a.placement.def &
 ```
+ ![Magic View 1](screenshots/Magic_View.png)
 
-- **Magic DEF 1**  
-  ![Magic View 1](screenshots/180.png)
+- **Magic Viewt**
 
-- **Magic DEF 2**  
-  ![Magic View 2](screenshots/181.png)
+  ![Magic View 1](screenshots/Magic_View_1.png)
 
-- **Magic DEF 3**  
-  ![Magic View 3](screenshots/182.png)
+ 
+  ![Magic View 2](screenshots/Magic_View_2.png)
 
-- **Magic DEF 4**  
-  ![Magic View 4](screenshots/183.png)
 
-- **Magic DEF 5**  
-  ![Magic View 5](screenshotss/184.png)
+  ![Magic View 3](screenshots/Magic_View_3.png)
+
+
+  ![Magic View 4](screenshots/Magic_View_4.png)
+
+ 
+  ![Magic View 5](screenshotss/Magic_View_5.png)
+
+  ![Magic View 5](screenshotss/Magic_View_6.png)
+
+  ![Magic View 5](screenshotss/Magic_View_7.png)
 
 
 ## 5. Netlist and Cell Verification
