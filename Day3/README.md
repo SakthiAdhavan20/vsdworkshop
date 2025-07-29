@@ -291,7 +291,7 @@ magic -d XR
 
 ![met3_zoom](screenshots/met3_zoom.png)
 
-![met3_zoom](screenshots/met3_zoom1.png)
+)
   
 ![poly_open](screenshots/poly_open.png)
 
@@ -320,7 +320,6 @@ drc check
 
 ![drc_pass](screenshots/drc_pass1.png)
 
-![drc_pass](screenshots/drc_pass2.png)
 
 ---
 
