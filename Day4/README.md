@@ -326,15 +326,15 @@ def read picorv32a.placement.def &
 
 # Timing Analysis with Ideal Clocks using OpenSTA
 
-![STA  File 1](screenshots/142.png)
+![STA  File 1](screenshots/STA1.png)
 
-![STA  File 2](screenshots/142.png)
+![STA  File 2](screenshots/STA2.png)
 
-![STA  File 3](screenshots/142.png)
+![STA  File 3](screenshots/STA3.png)
 
-![STA  File 4](screenshots/142.png)
+![STA  File 4](screenshots/STA4.png)
 
-![STA  File 5](screenshots/142.png)
+![STA  File 5](screenshots/STA5.png)
 
 ---
 
@@ -349,7 +349,6 @@ add_lefs -src $lefs
 set ::env(SYNTH_SIZING) 1
 run_synthesis
 ```
-
 ---
 
 ## Step 2: Create the STA Configuration File
@@ -371,7 +370,7 @@ report_tns
 report_wns
 ```
 
-![STA Configuration File](screenshots/142.png)
+![STA Configuration File](screenshots/STA_Configuration_File.png)
 
 ---
 
@@ -408,7 +407,7 @@ puts "\[INFO\]: Setting load to: $cap_load"
 set_load  $cap_load [all_outputs]
 ```
 
-![SDC Configuration File](screenshots/143.png)
+![SDC Configuration File](screenshots/SDC_Configuration_File.png)
 
 ---
 
@@ -420,10 +419,10 @@ sta pre_sta.conf
 
 Sample output:
 
-![STA Report 1](screenshots/144.png) 
-![STA Report 2](screenshots/145.png) 
-![STA Report 3](screenshots/146.png)
-
+![STA Report 1](screenshots/STA_Report_1.png) 
+![STA Report 2](screenshots/STA_Report_2.png) 
+![STA Report 3](screenshots/STA_Report_3.png)
+![STA Report 4](screenshots/STA_Report_4.png)
 ---
 
 ## Step 5: Modify Max Fanout and Re-run Synthesis
@@ -438,14 +437,17 @@ set ::env(SYNTH_SIZING) 1
 set ::env(SYNTH_MAX_FANOUT) 4
 run_synthesis
 ```
+![Re-run Synthesis](screenshots/Re-run_Synthesis.png)
+
+![Re-run Synthesis](screenshots/Re-run_Synthesis1.png)
 
 Fanout-modified results:
 
-![Fanout Output 1](screenshots/147.png) 
-![Fanout Output 2](screenshots/148.png) 
-![Fanout Output 3](screenshots/149.png) 
-![Fanout Output 4](screenshots/150.png) 
-![Fanout Output 5](screenshots/151.png)
+![Fanout Output 1](screenshots/Fanout_Output_1.png) 
+![Fanout Output 2](screenshots/Fanout_Output_2.png) 
+![Fanout Output 3](screenshots/Fanout_Output_3.png) 
+![Fanout Output 4](screenshots/Fanout_Output_4.png) 
+
 
 ---
 
