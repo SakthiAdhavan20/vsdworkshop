@@ -231,41 +231,35 @@ plot v(a) v(y)
 - 80% rise voltage point 
 ![rise_zoom2](screenshots/rise_zoom2.png)
 
-- Terminal log showing timing values
-![rise_terminal](screenshots/87.png)
-
 ```
-Rise Transition = 2.239 - 2.180 = 0.059ns
+Rise Transition = 2.24 - 2.04 = 0.2ns
 ```
 
 ### 7.2 Rise Delay
 
-📷 Screenshot:  
-![rise_delay](screenshots/88.png)
-
-📷 Screenshot:  
-![rise_delay_terminal](screenshots/89.png)
+  
+![rise_delay](screenshots/rise_delay.png)
 
 ```
-Rise Delay = 2.207 - 2.150 = 0.057ns
+Rise Delay = 2.2466 - 2.21016 = 0.03644ns
 ```
 
 ### 7.3 Fall Transition
 
-📷 Screenshot:  
-![fall_transition_terminal](screenshots/91.png)
+  
+![fall_transition_terminal](screenshots/fall_transition_terminal.png)
 
 ```
-Fall Transition = 4.093 - 4.050 = 0.0428ns
+Fall Transition = 4.05532 - 4.053 = 0.00232ns
 ```
 
 ### 7.4 Fall Delay
 
-📷 Screenshot:  
-![fall_delay_terminal](screenshots/90.png)
+  
+![fall_delay_terminal](screenshots/fall_delay_terminal.png)
 
 ```
-Fall Delay = 4.075 - 4.050 = 0.025ns
+Fall Delay = 4.055 - 4.038 = 0.017ns
 ```
 
 ---
