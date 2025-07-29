@@ -44,7 +44,7 @@ grid 0.46um 0.34um 0.23um 0.17um
 ```
 
 - **Resized Grid 1**  
-  ![Resized Grid 1](screenshots/After_Resize.png)
+![Resized Grid 1](screenshots/After_Resize.png)
 
 
 Here, the input and output ports (A and Y) are lying on the intersection of the vertical and horizontal pitch ✅
@@ -69,7 +69,7 @@ lef write
 ```
 
 - **LEF Write**  
-  ![LEF Write Output](screenshots/LEF_Generation.png)
+![LEF Write Output](screenshots/LEF_Generation.png)
   
 ![LEF Write Output](screenshots/LEF_Generation1.png)
 
@@ -87,7 +87,7 @@ cp sky130_vsdinv.lef ~/Desktop/work/tools/openlane_working_dir/openlane/designs/
 ```
 
 - **Copied Files Result**  
-  ![Copied LEF and LIB](screenshots/Copied_LEF_and_LIB.png)
+![Copied LEF and LIB](screenshots/Copied_LEF_and_LIB.png)
   
 ![Copied LEF and LIB](screenshots/Copied_LEF_and_LIB_1.png)
 
@@ -107,6 +107,18 @@ set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/sr
 - **Updated Config**  
   ![Config.tcl Update](screenshots/Config_Edit.png)
 
+- **sky130_fd_sc_hd__typical.lib**
+  
+  ![Config.tcl Update](screenshots/Config_Edit1.png)
+
+- **sky130_fd_sc_hd__slow.lib**
+
+  ![Config.tcl Update](screenshots/Config_Edit2.png)
+
+- **sky130_fd_sc_hd__fast.lib**
+
+  ![Config.tcl Update](screenshots/Config_Edit3.png)
+
 ---
 
 ## Start OpenLANE Flow
@@ -114,7 +126,7 @@ set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/sr
 ```tcl
 ./flow.tcl -interactive
 package require openlane 0.9
-prep -design picorv32a -tag 16-03_17-49 -overwrite
+prep -design picorv32a -tag 26-07_06-22 -overwrite
 set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
 add_lefs -src $lefs
 run_synthesis
