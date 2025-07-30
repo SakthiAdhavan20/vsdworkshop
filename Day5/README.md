@@ -53,8 +53,9 @@ Now, run the command below to generate the PDN:
 gen_pdn
 ```
 
-![PDN Generation Output 1](../images/196.png)  
-![PDN Generation Output 2](../images/197.png)
+![PDN Generation Output 1](screenshots/PDN_Generation1.png) 
+
+![PDN Generation Output 2](screenshots/PDN_Generation2.png)
 
 To view the PDN output in Magic, navigate to:
 
@@ -70,9 +71,15 @@ lef read ../../tmp/merged.lef \
 def read 12-pdn.def &
 ```
 
-![PDN in Magic 1](../images/193.png)  
-![PDN in Magic 2](../images/194.png)  
-![PDN in Magic 3](../images/195.png)
+![PDN in Magic 1](screenshots/PDN_in_Magic.png)
+ 
+![PDN in Magic 2](screenshots/PDN_in_Magic1.png) 
+
+![PDN in Magic 3](screenshotss/PDN_in_Magic2.png)
+
+![PDN in Magic 3](screenshotss/PDN_in_Magic3.png)
+
+![PDN in Magic 3](screenshotss/PDN_in_Magic4.png)
 
 ## Step 2: Perform Routing
 
@@ -84,9 +91,7 @@ run_routing
 
 This will invoke global and detailed routing.
 
-![Routing Output 1](../images/198.png)  
-![Routing Output 2](../images/199.png)  
-![Routing Output 3](../images/200.png)
+![Routing Output 1](screenshots/Routing.png)
 
 Routing began with 26,890 violations in the 1st optimization and reached 0 violations in the 57th.
 
@@ -104,13 +109,16 @@ lef read ../../tmp/merged.lef \
 def read picorv32a.def &
 ```
 
-![Final Routing in Magic 1](../images/201.png)  
-![Final Routing in Magic 2](../images/202.png)  
-![Final Routing in Magic 3](../images/203.png)
+![Final Routing in Magic 1](screenshots/Magic_1.png) 
+![Final Routing in Magic 2](screenshots/Magic_2.png) 
+![Final Routing in Magic 3](screenshots/Magic_3.png)
+![Final Routing in Magic 3](screenshots/Magic_4.png)
+![Final Routing in Magic 3](screenshots/Magic_5.png)
+![Final Routing in Magic 3](screenshots/Magic_6.png)
 
 Final DEF snapshot:
 
-![Final DEF Snapshot](../images/picorv32a.def.png)
+![Final DEF Snapshot](screenshotss/picorv32a.def.png)
 
 
 # TritonRoute Features
@@ -126,13 +134,13 @@ TritonRoute is the detailed router used in OpenLane. It performs:
 
 Below are the various logs and visual outputs from TritonRoute:
 
-![TritonRoute Log 1](../images/204.png)  
-![TritonRoute Log 2](../images/205.png)  
-![TritonRoute Log 3](../images/206.png)  
-![TritonRoute Log 4](../images/207.png)  
-![TritonRoute Log 5](../images/208.png)  
-![TritonRoute Log 6](../images/209.png)  
-![TritonRoute Log 7](../images/210.png)  
-![TritonRoute Log 8](../images/211.png)
+![TritonRoute Log 1](screenshots/TritonRoute1.png) 
+![TritonRoute Log 2](screenshots/TritonRoute2.png) 
+![TritonRoute Log 3](screenshots/TritonRoute3.png) 
+![TritonRoute Log 4](screenshots/TritonRoute4.png) 
+![TritonRoute Log 5](screenshots/TritonRoute5.png) 
+![TritonRoute Log 6](screenshots/TritonRoute6.png) 
+![TritonRoute Log 7](screenshots/TritonRoute7.png) 
+![TritonRoute Log 8](screenshots/TritonRoute8.png)
 
 
