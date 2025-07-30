@@ -25,7 +25,8 @@ This repository documents the entire workshop with step-by-step lab procedures, 
 - Design preparation and synthesis flow
 - GitHub structure and synthesis result analysis
 
-**Folder:** `Day1_Inception_OpenLANE`
+**Folder:** `Day1_Inception_OpenLANE`  
+🔗 [Click to view README](Day1/README.md)
 
 ---
 
@@ -46,7 +47,8 @@ This repository documents the entire workshop with step-by-step lab procedures, 
 - Designing a standard cell (inverter) from circuit to layout
 - Timing metrics: thresholds, propagation delay, and transition time
 
-**Folder:** `Day2_Floorplanning_Placement`
+**Folder:** `Day2_Floorplanning_Placement`  
+🔗 [Click to view README](Day2/README.md)
 
 ---
 
@@ -59,7 +61,8 @@ This repository documents the entire workshop with step-by-step lab procedures, 
 - Inverter layout, DRC, and LEF extraction
 - Debugging Sky130 tech DRC rules in Magic
 
-**Folder:** `Day3_Cell_Design_Characterization`
+**Folder:** `Day3_Cell_Design_Characterization`  
+🔗 [Click to view README](Day3/README.md)
 
 ---
 
@@ -81,7 +84,8 @@ This repository documents the entire workshop with step-by-step lab procedures, 
 - Setup and hold analysis with post-CTS real clock trees
 - Using accurate timing libraries for realistic results
 
-**Folder:** `Day4_Timing_ClockTree`
+**Folder:** `Day4_Timing_ClockTree`  
+🔗 [Click to view README](Day4/README.md)
 
 ---
 
@@ -96,7 +100,8 @@ This repository documents the entire workshop with step-by-step lab procedures, 
 - Guide-based routing and inter-layer connectivity
 - Final GDSII generation and post-route file review
 
-**Folder:** `Day5_RTL2GDS_Routing_DRC`
+**Folder:** `Day5_RTL2GDS_Routing_DRC`  
+🔗 [Click to view README](Day5/README.md)
 
 ---
 
@@ -130,6 +135,11 @@ This workshop is based on open-source platforms and learning initiatives by:
 - [OpenLANE by efabless](https://www.efabless.com/openlane) – RTL2GDSII flow
 - [VSDOpen](https://www.vlsisystemdesign.com/) – Open EDA learning and simulation labs
 
+Special thanks to:
+
+- **Kunal Ghosh** – Founder, VLSI System Design Corp.  
+- **Nickson Jose** – Developer & Contributor, Open Source Physical Design
+
 ---
 
 ## Get Started
@@ -137,4 +147,3 @@ This workshop is based on open-source platforms and learning initiatives by:
 Browse each day’s folder to begin your RTL2GDS journey.
 
 Start from Day 1 and build your own standard cell or SoC—fully open-source.
-
