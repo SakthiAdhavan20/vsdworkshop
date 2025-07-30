@@ -4,19 +4,19 @@
 
 - `Maze Routing - Lee's Algorithm`
 
-![Maze Routing Grid](../images/168.png)
+![Maze Routing Grid](screenshots/Maze_Routing_Grid.png)
 
-![Lee’s Algorithm Visualization](../images/169.png)
+![Lee’s Algorithm Visualization](screenshots/Lee’s_Algorithm_Visualization.png)
 
 - DRC Check
 
-![DRC Error Report](../images/170.png)
+![DRC Error Report](screenshots/DRC.png)
 
-![Magic DRC Screen](../images/171.png)
+![Magic DRC Screen](screenshots/Magic.png)
 
 - Parasitics Extraction
 
-![Parasitic Extraction Output](../images/172.png)
+![Parasitic Extraction Output](screenshots/Parasitic.png)
 
 
 # Power Distribution Network and Routing
