@@ -118,7 +118,7 @@ def read picorv32a.def &
 
 Final DEF snapshot:
 
-![Final DEF Snapshot](screenshotss/picorv32a_def.png)
+![Final DEF Snapshot](screenshots/picorv32a_def.png)
 
 
 # TritonRoute Features
