@@ -75,11 +75,11 @@ def read 12-pdn.def &
  
 ![PDN in Magic 2](screenshots/PDN_in_Magic1.png) 
 
-![PDN in Magic 3](screenshotss/PDN_in_Magic2.png)
+![PDN in Magic 3](screenshots/PDN_in_Magic2.png)
 
-![PDN in Magic 3](screenshotss/PDN_in_Magic3.png)
+![PDN in Magic 3](screenshots/PDN_in_Magic3.png)
 
-![PDN in Magic 3](screenshotss/PDN_in_Magic4.png)
+![PDN in Magic 3](screenshots/PDN_in_Magic4.png)
 
 ## Step 2: Perform Routing
 
@@ -118,7 +118,7 @@ def read picorv32a.def &
 
 Final DEF snapshot:
 
-![Final DEF Snapshot](screenshotss/picorv32a.def.png)
+![Final DEF Snapshot](screenshotss/picorv32a_def.png)
 
 
 # TritonRoute Features
