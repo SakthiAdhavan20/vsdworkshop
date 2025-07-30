@@ -1,8 +1,8 @@
-# 🗓️ Sky130 Day 1 – Inception of Open-Source EDA, OpenLANE and Sky130 PDK
+#  Sky130 Day 1 – Inception of Open-Source EDA, OpenLANE and Sky130 PDK
 
 ---
 
-## 🎯 Objective
+##  Objective
 
 - Understand how software applications become hardware using RTL to GDSII flow  
 - Learn about SoC components: chips, dies, cores, pads, and IPs  
@@ -12,9 +12,9 @@
 
 ---
 
-## 📘 Theory Section
+##  Theory Section
 
-### 🔸 0. Introduction to QFN-48 Package, Chip, Pads, Core, Die, and IPs
+###  0. Introduction to QFN-48 Package, Chip, Pads, Core, Die, and IPs
 
 - **Chip**: The actual silicon die that holds your digital logic  
 - **Package (QFN-48)**: Holds and protects the chip; has 48 pins for connection  
@@ -22,44 +22,44 @@
 - **Core**: The active region of the die (excluding pads and IOs)  
 - **IP Blocks**: Pre-designed logic like PLLs, memories, etc., reused across chips  
 
-📷 Screenshot:  
+  
 ![Processor/SoC](Screenshots/Processor-SoC.png)
 
-📷 Screenshot:  
+  
 ![ATMega32u4-RISC-based-microcontroller](Screenshots/ATMega32u4%20RISC-based%20microcontroller.png)
 
 
-📷 Screenshot:  
+  
 ![chip-package-core](Screenshots/chip-package-core.png)
 
 ---
 
-### 🔸 1. Introduction to RISC-V
+###  1. Introduction to RISC-V
 
 - **RISC-V** is an open-source Instruction Set Architecture (ISA)  
 - Used widely in open-source and academic processor designs  
 - Base ISA is simple, modular, and extensible  
 
-📷 Screenshot:  
+  
 ![riscv-diagram](Screenshots/riscv-diagram.png)
 
 ---
 
-### 🔸 2. From Software Applications to Hardware
+###  2. From Software Applications to Hardware
 
 - Software is written in C, compiled to assembly (e.g., RISC-V), executed on hardware  
 - Hardware implements ISA logic using digital circuits  
 - VLSI engineers design the underlying digital hardware that executes software  
 
-📷 Screenshot:  
+  
 ![software-to-hardware](Screenshots/software-to-hardware.png)
 
-📷 Screenshot:  
+  
 ![isa-to-hardware](Screenshots/isa-to-hardware.png)       
 
 ---
 
-### 🔸 3. Open-Source Digital ASIC Design Components
+###  3. Open-Source Digital ASIC Design Components
 
 | Component | Tool Used       | Role                        |
 |-----------|------------------|-----------------------------|
@@ -68,12 +68,12 @@
 | Layout    | Magic            | View/edit physical layout  |
 | Checks    | Netgen/Klayout   | DRC, LVS, PEX              |
 
-📷 Screenshot:  
+  
 ![open-source-eda-stack](Screenshots/open-source-eda-stack.png)
 
 ---
 
-### 🔸 4. Simplified RTL2GDSII Flow
+###  4. Simplified RTL2GDSII Flow
 
 1. Write RTL (Verilog)  
 2. Synthesis → Netlist  
@@ -81,23 +81,23 @@
 4. DRC + LVS  
 5. Export GDSII for tapeout  
 
-📷 Screenshot:  
+  
 ![rtl2gdsii-simplified](Screenshots/rtl2gdsii-simplified.png)
 
 ---
 
-### 🔸 5. OpenLANE Detailed ASIC Design Flow
+###  5. OpenLANE Detailed ASIC Design Flow
 
 - Each OpenLANE step has configurable TCL scripts  
 - Fully open-source RTL to GDSII automation  
 - Output logs for every stage are stored inside `/runs/<design-name>/`  
 
-📷 Screenshot:  
+  
 ![openlane-detailed-flow](Screenshots/openlane-detailed-flow.png)
 
 ---
 
-### 🔸 6. sky130A PDK Directory Structure
+###  6. sky130A PDK Directory Structure
 
 Once OpenLANE is installed, the Platform Development Kit (PDK) for Sky130 is downloaded under the path:
 
@@ -168,21 +168,21 @@ sky130_osu_sc_t18/   # OSU-based standard cells (for experimentation)
 
 ---
 
-📷 Screenshot:  
+  
 ![sky130A PDK Directory](Screenshots/sky130A-pdk-director.png)
 
 
 ---
 
-## 🧪 Practical Section – Lab Steps for Synthesis
+##  Practical Section – Lab Steps for Synthesis
 
-### 🔸 7.OpenLANE Flow – Picorv32a Design (Sky130 PDK)
+###  7.OpenLANE Flow – Picorv32a Design (Sky130 PDK)
 
 This section documents running the `picorv32a` design using OpenLANE v0.21 and Sky130A PDK. The flow includes preparing the interactive session, running the `prep` step, and checking output directories.
 
 ---
 
-#### ✅ Step 1 – Launch Docker and Start OpenLANE Flow
+####  Step 1 – Launch Docker and Start OpenLANE Flow
 
 ```bash
 cd ~/Desktop/work/tools/openlane_working_dir/openlane/
@@ -201,12 +201,12 @@ Then at `%` prompt:
 package require openlane 0.9
 ```
 
-📷 Screenshot:  
+ 
 ![Step 1 - Docker Interactive](Screenshots/step1_docker_interactive.png)
 
 ---
 
-#### ✅ Step 2 – Prepare the Picorv32a Design
+####  Step 2 – Prepare the Picorv32a Design
 
 Inside the interactive OpenLANE shell:
 
@@ -221,15 +221,15 @@ This step:
 - Merges LEF/Liberty files
 - Final message: **Preparation complete**
 
-📷 Screenshot:  
+  
 ![Step 2 - Prep Design check](Screenshots/step2_prep_design_check.png)
 
-📷 Screenshot:  
+  
 ![Step 2 - Prep Design](Screenshots/step2_prep_design.png)
 
 ---
 
-#### ✅ Step 3 – Explore Design Run and Temporary Files
+####  Step 3 – Explore Design Run and Temporary Files
 
 ```bash
 cd designs/picorv32a/runs/
@@ -243,14 +243,14 @@ You can now access all intermediate folders:
 - `floorplan/`, `synthesis/`, `routing/`, etc.
 - Files like `merged.lef`, `trimmed.lib`, `met_layers_list.txt`
 
-📷 Screenshot:  
+  
 ![Step 3 - Explore tmp Folder](Screenshots/tep3_explore_tmp_folder.png)
 
 ---
 
 ---
 
-### 🔸 8. Run Synthesis + Review Files
+###  8. Run Synthesis + Review Files
 
 ```bash
 run_synthesis
@@ -349,14 +349,14 @@ set load         = 0.01765
  *Negative slack* indicates **timing violations** that will be addressed in later stages (placement, CTS, routing).
 
 
-📷 Screenshot:
+
 ![run_synthesis_summary](Screenshots/run_synthesis_summary1.png)
 
 ![run_synthesis_summary](Screenshots/run_synthesis_summary2.png)
 
 ---
 
-## ✅ Summary
+##  Summary
 
 | Step                       | Status | Notes                            |
 |----------------------------|--------|----------------------------------|
