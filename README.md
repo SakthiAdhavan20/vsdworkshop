@@ -1,4 +1,4 @@
-# Digital VLSI SoC Design and Planning Workshop – 2 Weeks
+# Digital VLSI SoC Design and Planning Workshop – 2 Weeks (July 16-29,2025)
 
 Welcome to the fascinating universe of Physical Design (PnR – Place and Route), where the heart of every integrated circuit (IC) design beats. In this 2-week hands-on workshop, we journey through the complete RTL to GDSII flow using **OpenLANE** and **Sky130 PDK**, culminating in tape-out-ready layouts and deep insights into timing, layout, and routing.
 
