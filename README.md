@@ -54,12 +54,34 @@ This repository documents the entire workshop with step-by-step lab procedures, 
 
 ### Day 3 – Custom Cell Design with Magic and ngspice
 
-- SPICE deck generation and inverter simulation with ngspice
-- Static vs dynamic inverter behavior analysis
-- Working with `vsdstdcelldesign` repository
-- CMOS fabrication steps visualized in layout
-- Inverter layout, DRC, and LEF extraction
-- Debugging Sky130 tech DRC rules in Magic
+#### SPICE Simulation and Characterization
+
+- Creating SPICE decks for CMOS inverter using extracted netlists  
+- Performing static and dynamic simulations in ngspice  
+- Analyzing switching threshold (Vm), delay, and power  
+
+#### Standard Cell Layout and Extraction
+
+- Designing inverter layout using Magic with Sky130 PDK  
+- Running DRC and extracting LEF and SPICE files  
+- Working with `vsdstdcelldesign` GitHub repository for standard cell design flow  
+
+#### CMOS Fabrication Process Visualization
+
+Layout-based visualization of process steps:
+
+- Active region creation  
+- N-well and P-well formation  
+- Gate terminal and LDD formation  
+- Source/drain and interconnect layer formation  
+- Metal layer stacking and local interconnects  
+
+#### DRC Debugging with Sky130 Tech Files
+
+- Understanding DRC rule violations in Magic  
+- Fixing poly spacing and diffusion/tap spacing errors  
+- Editing and validating Sky130 technology files for correct rule definitions  
+
 
 **Folder:** `Day3_Cell_Design_Characterization`  
 🔗 [Click to view README](Day3/README.md)
